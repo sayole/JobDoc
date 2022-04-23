@@ -82,6 +82,30 @@ class consultant_detail extends StatelessWidget {
                       letterSpacing: -0.6,
                     ),
                   ),
+                  SizedBox(height: 12),
+                  Container(
+                    height: 30,
+                    child: ListView.builder(
+                      // physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            right: 8,
+                          ),
+                          child: ClipOval(
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              color: Colors.red,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   // 여기에 이미지를 넣어야함.
                   SizedBox(height: 40),
                   Text(
@@ -136,6 +160,7 @@ class consultant_detail extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 10,
                       letterSpacing: -0.6,
+                      color: Color(0xFFF3D3D3D),
                     ),
                   ),
                   SizedBox(height: 16),
@@ -224,24 +249,29 @@ class consultant_detail extends StatelessWidget {
             bottom: MediaQuery.of(context).size.height * 0.05,
             left: 0,
             right: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Center(
-                  child: Text(
-                    "이 컨설턴트와 상담하기",
-                    style: TextStyle(
-                      fontSize: 14,
-                      letterSpacing: -0.6,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                    child: Text(
+                      "이 컨설턴트와 상담하기",
+                      style: TextStyle(
+                        fontSize: 14,
+                        letterSpacing: -0.6,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
-                height: 52,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF3936F1),
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF3936F1),
+                  ),
                 ),
               ),
             ),

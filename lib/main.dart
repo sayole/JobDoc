@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/main_home.dart';
 import 'package:job_doc/pages/proposal/consultant_detail.dart';
+import 'package:job_doc/pages/proposal/proposal_list.dart';
 import 'package:job_doc/palette.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(backgroundColor: Palette.background),
         fontFamily: 'Pretendard',
         primaryColor: Palette.background,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: contact_info(),
+      home: proposal_list(),
     );
   }
 }

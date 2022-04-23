@@ -8,6 +8,7 @@ class contact_info extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.white,
         title: Text(
           "컨설턴트 닉네임",
           style: TextStyle(
