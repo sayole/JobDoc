@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/images/person01.png
     - assets/icons/add.png
+    - assets/icons/light_bulb_filament.png
     - assets/icons/backward.png
     - assets/icons/bell.png
     - assets/icons/bottom_arrow.png

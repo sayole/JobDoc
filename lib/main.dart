@@ -5,7 +5,7 @@ import 'package:job_doc/pages/proposal/consultant_detail.dart';
 import 'package:job_doc/palette.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'package:job_doc/pages/proposal/proposal_list.dart';
+import 'package:job_doc/pages/proposal/contact_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Pretendard',
         primaryColor: Palette.background,
       ),
-      home: consultant_detail(),
+      home: contact_info(),
     );
   }
 }
