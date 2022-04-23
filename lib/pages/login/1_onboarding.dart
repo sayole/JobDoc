@@ -5,6 +5,15 @@ class OnBoarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+          Text('빠르고 확실한'),
+          Text('커리어 컨설턴트 매칭'),
+        ],
+      ),
+    );
   }
 }
