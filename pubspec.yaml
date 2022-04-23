@@ -87,9 +87,9 @@ flutter:
     - assets/icons/search.png
     - assets/icons/setting_chosen.png
     - assets/icons/setting_not_chosen.png
-    - assets/done_image.png
-    - assets/logo.png
-    - assets/sign_in_image.png
+    - assets/images/done_image.png
+    - assets/images/logo.png
+    - assets/images/sign_in_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
