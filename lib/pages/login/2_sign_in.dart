@@ -15,7 +15,7 @@ class _SignInState extends State<SignIn> {
   TapGestureRecognizer usageLinkRecognizer = TapGestureRecognizer();
 
   void NextPage() {
-    // Navigator.pushReplacement(
+    // Navigator.push(
     //   context,
     //   MaterialPageRoute(builder: (context) => PrivacyPolicy()),
     // );
@@ -81,7 +81,7 @@ class _SignInState extends State<SignIn> {
                   text,
                   style: TextStyle(
                     color: type == 'facebook' ? Colors.white : Colors.black,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 14,
                   ),
                 ),
@@ -153,11 +153,11 @@ class _SignInState extends State<SignIn> {
                       child: LoginButton('google'),
                     ),
                     GestureDetector(
-                      onTap: () => {print('apple')},
+                      onTap: () => {print('apple'), NextPage()},
                       child: LoginButton('apple'),
                     ),
                     GestureDetector(
-                      onTap: () => {print('facebook')},
+                      onTap: () => {print('facebook'), NextPage()},
                       child: LoginButton('facebook'),
                     ),
                     RichText(
