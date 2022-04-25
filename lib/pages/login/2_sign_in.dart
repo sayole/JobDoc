@@ -1,6 +1,7 @@
 //회원가입 페이지
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/login/3_privacy_policy.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -12,6 +13,14 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TapGestureRecognizer privacyLinkRecognizer = TapGestureRecognizer();
   TapGestureRecognizer usageLinkRecognizer = TapGestureRecognizer();
+
+  void NextPage() {
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => PrivacyPolicy()),
+    // );
+    print('next');
+  }
 
   Widget LoginButton(String type) {
     String logo = '';
@@ -140,7 +149,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => {print('google')},
+                      onTap: () => {print('google'), NextPage()},
                       child: LoginButton('google'),
                     ),
                     GestureDetector(
