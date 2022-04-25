@@ -1,7 +1,7 @@
 //회원가입 페이지
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:job_doc/pages/login/3_privacy_policy.dart';
+import 'package:job_doc/pages/login/3_starting_process.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/login/6_career_page.dart';
 
 import 'login_process_scaffold.dart';
 
@@ -31,7 +32,7 @@ class _EducationPageState extends State<EducationPage> {
           ),
         ),
       ),
-      nextPage: EducationPage(),
+      nextPage: CareerPage(),
       index: 1,
     );
   }

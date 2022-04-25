@@ -1,31 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:job_doc/pages/login/4_name_page.dart';
+import 'package:job_doc/pages/login/5_education_page.dart';
 
-class LoginProcessScaffold extends StatefulWidget {
-  const LoginProcessScaffold(
-      {Key? key,
-      required this.body,
-      required this.nextPage,
-      required this.index})
-      : super(key: key);
-  final Widget body;
-  final Widget nextPage;
-  final double index;
-
-  @override
-  State<LoginProcessScaffold> createState() => _LoginProcessScaffoldState();
-}
-
-class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
-  bool isDone = false;
-
-  checkProcessDone() {}
-
-  final TextStyle doneStyle =
-      const TextStyle(fontSize: 16.0, color: Colors.white);
-
-  final TextStyle notDoneStyle =
-      const TextStyle(fontSize: 16.0, color: Colors.white);
+class StartingProcess extends StatelessWidget {
+  const StartingProcess({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,25 +28,29 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget.index == 0
-                  ? SizedBox(height: 2)
-                  : FAProgressBar(
-                      currentValue: widget.index,
-                      size: 2,
-                      maxValue: 8,
-                      backgroundColor: Colors.grey,
-                      progressColor: const Color(0xff3936f1),
-                      animatedDuration: const Duration(milliseconds: 400),
-                      direction: Axis.horizontal,
-                      verticalDirection: VerticalDirection.up,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
                     ),
-              widget.body,
+                    children: [
+                      TextSpan(text: "간단한 질문에 답해주시면\n"),
+                      TextSpan(text: "저희가 프로필을 만들어서\n"),
+                      TextSpan(text: "컨설턴트에게 제안서를 보내드릴게요\n"),
+                    ],
+                  ),
+                ),
+              ),
               Spacer(),
               GestureDetector(
                 onTap: () => {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => widget.nextPage),
+                    MaterialPageRoute(builder: (context) => NamePage()),
                   ),
                 },
                 child: Container(
