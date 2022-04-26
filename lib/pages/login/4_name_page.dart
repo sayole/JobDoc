@@ -42,14 +42,6 @@ class _NamePageState extends State<NamePage> {
             children: [
               ...SubmitWidgets.infoText('이름을 입력해 주세요',
                   '이름은 오직 컨설턴트와 이야기할 때 본인인지 확인하는 용도로 만 사용돼요. 주민등록상 본명을 입력해주세요'),
-              // SizedBox(height: 20),
-              // Text('이름을 입력해 주세요', style: LoginStyles.headline),
-              // SizedBox(height: 20),
-              // Text(
-              //   '이름은 오직 컨설턴트와 이야기할 때 본인인지 확인하는 용도로 만 사용돼요. 주민등록상 본명을 입력해주세요',
-              //   style: LoginStyles.caption,
-              // ),
-              // SizedBox(height: 25),
               TextField(
                 controller: nameController,
                 style: LoginStyles.inputStyle,
