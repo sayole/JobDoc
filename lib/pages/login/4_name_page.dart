@@ -17,7 +17,7 @@ class NamePage extends StatefulWidget {
 class _NamePageState extends State<NamePage> {
   TextEditingController nameController = TextEditingController();
 
-  void _printLatestValue() {
+  void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
     service.checkProcessDone();
   }
@@ -25,7 +25,7 @@ class _NamePageState extends State<NamePage> {
   @override
   void initState() {
     super.initState();
-    nameController.addListener(_printLatestValue);
+    nameController.addListener(checkProcessDone);
   }
 
   @override
@@ -42,17 +42,7 @@ class _NamePageState extends State<NamePage> {
             children: [
               ...SubmitWidgets.infoText('이름을 입력해 주세요',
                   '이름은 오직 컨설턴트와 이야기할 때 본인인지 확인하는 용도로 만 사용돼요. 주민등록상 본명을 입력해주세요'),
-              TextField(
-                controller: nameController,
-                style: LoginStyles.inputStyle,
-                decoration: InputDecoration(
-                  hintText: "이름을 입력해주세요",
-                  hintStyle: LoginStyles.hintStyle,
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              )
+              SubmitWidgets.submitTextField("이름을 입력해주세요", nameController)
             ],
           ),
         ),
