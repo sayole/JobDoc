@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/6_career_page.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/login_process_service.dart';
 import 'login_process_scaffold.dart';
 
 class EducationPage extends StatefulWidget {
@@ -11,29 +13,38 @@ class EducationPage extends StatefulWidget {
 }
 
 class _EducationPageState extends State<EducationPage> {
-  TextEditingController emaincontroller = TextEditingController();
+  TextEditingController groupcontroller = TextEditingController();
+  TextEditingController schoolNameController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return LoginProcessScaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: RichText(
-          text: TextSpan(
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
+    return Consumer<LoginProcessSerivce>(
+      builder: (context, loginProcessService, child) {
+        loginProcessService.addControllers(
+            [groupcontroller, schoolNameController, statusController]);
+        return LoginProcessScaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                ),
+                children: [
+                  TextSpan(text: "aaaaaaaaaaaa\n"),
+                  TextSpan(text: "aaaaaaaaaaaaaaaaa\n"),
+                  TextSpan(text: "aaaaaaaaaaaaaaaaaaaa\n"),
+                ],
+              ),
             ),
-            children: [
-              TextSpan(text: "aaaaaaaaaaaa\n"),
-              TextSpan(text: "aaaaaaaaaaaaaaaaa\n"),
-              TextSpan(text: "aaaaaaaaaaaaaaaaaaaa\n"),
-            ],
           ),
-        ),
-      ),
-      nextPage: CareerPage(),
-      index: 1,
+          nextPage: CareerPage(),
+          index: 1,
+        );
+      },
     );
   }
 }

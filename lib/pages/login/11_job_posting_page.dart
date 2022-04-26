@@ -11,9 +11,14 @@ class JobPostingPage extends StatefulWidget {
 }
 
 class _JobPostingPageState extends State<JobPostingPage> {
+  List<String> postController = [];
+
   @override
   Widget build(BuildContext context) {
     return LoginProcessScaffold(
-        body: Text('hello'), nextPage: DoneLoading(), index: 7);
+      body: Text('hello'),
+      nextPage: DoneLoading(),
+      index: 7,
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/4_name_page.dart';
 import 'package:job_doc/pages/login/5_education_page.dart';
+import 'package:job_doc/pages/login/widgets/login_styles.dart';
 
 class StartingProcess extends StatelessWidget {
   const StartingProcess({Key? key}) : super(key: key);
@@ -32,11 +33,7 @@ class StartingProcess extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: RichText(
                   text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
+                    style: LoginStyles.headline,
                     children: [
                       TextSpan(text: "간단한 질문에 답해주시면\n"),
                       TextSpan(text: "저희가 프로필을 만들어서\n"),

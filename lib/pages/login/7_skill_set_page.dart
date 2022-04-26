@@ -11,9 +11,14 @@ class SkillSetPage extends StatefulWidget {
 }
 
 class _SkillSetPageState extends State<SkillSetPage> {
+  List<String> skillController = [];
+
   @override
   Widget build(BuildContext context) {
     return LoginProcessScaffold(
-        body: Text('hello'), nextPage: WishingCompanyPage(), index: 3);
+      body: Text('hello'),
+      nextPage: WishingCompanyPage(),
+      index: 3,
+    );
   }
 }

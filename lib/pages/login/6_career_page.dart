@@ -10,9 +10,23 @@ class CareerPage extends StatefulWidget {
 }
 
 class _CareerPageState extends State<CareerPage> {
+  TextEditingController companyController = TextEditingController();
+  TextEditingController yearsController = TextEditingController();
+  TextEditingController partController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return LoginProcessScaffold(
-        body: Text('hello'), nextPage: SkillSetPage(), index: 2);
+      body: Text('hello'),
+      nextPage: SkillSetPage(),
+      index: 2,
+      // controllers: [
+      //   companyController,
+      //   yearsController,
+      //   partController,
+      //   typeController
+      // ],
+    );
   }
 }

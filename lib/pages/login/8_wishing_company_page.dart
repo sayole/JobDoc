@@ -11,9 +11,14 @@ class WishingCompanyPage extends StatefulWidget {
 }
 
 class _WishingCompanyPageState extends State<WishingCompanyPage> {
+  List<String> companyController = [];
+
   @override
   Widget build(BuildContext context) {
     return LoginProcessScaffold(
-        body: Text('hello'), nextPage: WishingJoinPage(), index: 4);
+      body: Text('hello'),
+      nextPage: WishingJoinPage(),
+      index: 4,
+    );
   }
 }
