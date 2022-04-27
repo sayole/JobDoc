@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/pages/login/login_process_scaffold.dart';
+import 'package:provider/provider.dart';
+import '../../services/login_process_service.dart';
+import 'widgets/submit_widgets.dart';
 
 class CareerPage extends StatefulWidget {
   CareerPage({Key? key}) : super(key: key);
@@ -15,18 +18,43 @@ class _CareerPageState extends State<CareerPage> {
   TextEditingController partController = TextEditingController();
   TextEditingController typeController = TextEditingController();
 
+  void checkProcessDone() {
+    LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    service.checkProcessDone();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    companyController.addListener(checkProcessDone);
+    yearsController.addListener(checkProcessDone);
+    partController.addListener(checkProcessDone);
+    typeController.addListener(checkProcessDone);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return LoginProcessScaffold(
-      body: Text('hello'),
-      nextPage: SkillSetPage(),
-      index: 2,
-      // controllers: [
-      //   companyController,
-      //   yearsController,
-      //   partController,
-      //   typeController
-      // ],
-    );
+    return Consumer<LoginProcessSerivce>(
+        builder: (context, loginProcessService, child) {
+      loginProcessService.addControllers(
+          [companyController, yearsController, partController, typeController]);
+      return LoginProcessScaffold(
+        body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...SubmitWidgets.infoText(
+                      '지금은 어떤 일을 하고 계시나요?', '현재 어떤 회사에서 어떤 일을 하고 계신지 알려주세요.'),
+                  SubmitWidgets.submitTextField('학력', companyController),
+                  SubmitWidgets.submitDropDownField('년차', yearsController),
+                  SubmitWidgets.submitTextField('직무', partController),
+                  SubmitWidgets.submitDropDownField('고용형태', typeController),
+                ])),
+        nextPage: SkillSetPage(),
+        index: 2,
+      );
+    });
   }
 }

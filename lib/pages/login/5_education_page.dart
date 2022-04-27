@@ -19,7 +19,6 @@ class _EducationPageState extends State<EducationPage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
-
     service.checkProcessDone();
   }
 
