@@ -52,8 +52,6 @@ class SubmitWidgets {
     ];
   }
 
-  //각 페이지에서 키워드로 받고 키워드가 네임이면 subtitle 리턴을 null
-
   static Widget submitTextField(
       String widgetName, TextEditingController editingController) {
     return Column(
@@ -105,7 +103,6 @@ class SubmitWidgets {
               borderSide: BorderSide(color: Colors.black),
             ),
           ),
-          // popupItemDisabled: (String s) => s.startsWith('I'),
           onChanged: (value) {
             editingController.text = value.toString();
           },
@@ -116,4 +113,48 @@ class SubmitWidgets {
       ],
     );
   }
+
+  static Widget textBox(String inputColor, String inputText) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          width: 1,
+          color: inputColor == 'blue' ? Color(0xff3936f1) : Color(0xffdfdfdf),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              inputText,
+              // overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 20,
+                color: inputColor == 'blue' ? Color(0xff3936f1) : Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(width: 8),
+            inputColor == 'blue'
+                ? Icon(
+                    Icons.clear,
+                    color: Color(0xff3936f1),
+                    size: 20,
+                  )
+                : Icon(
+                    Icons.add,
+                    color: Colors.black,
+                    size: 20,
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // static Widget skillSetWidget() {}
 }
