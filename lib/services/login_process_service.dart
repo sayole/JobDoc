@@ -8,14 +8,12 @@ class LoginProcessSerivce extends ChangeNotifier {
     controllers.clear();
 
     for (dynamic singleController in localControllers) {
-      print(singleController);
       controllers.add(singleController);
     }
   }
 
   checkProcessDone() {
     for (var controller in controllers) {
-      print(controller);
       if (controller.text == '') {
         isDone = false;
         return;

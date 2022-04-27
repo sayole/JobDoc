@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/6_career_page.dart';
 import 'package:provider/provider.dart';
-
 import '../../services/login_process_service.dart';
 import 'login_process_scaffold.dart';
 import 'widgets/submit_widgets.dart';
@@ -47,9 +46,9 @@ class _EducationPageState extends State<EducationPage> {
               children: [
                 ...SubmitWidgets.infoText(
                     '최종 학력을 입력해주세요', '작성하는 지금 이 순간 현재 학력이 무엇인지 입력해주세요.'),
-                SubmitWidgets.submitTextField("학력", groupcontroller),
+                SubmitWidgets.submitDropDownField('학력', groupcontroller),
                 SubmitWidgets.submitTextField("학교명", schoolNameController),
-                SubmitWidgets.submitTextField("재학 상태", statusController),
+                SubmitWidgets.submitDropDownField("재학 상태", statusController),
               ],
             ),
           ),

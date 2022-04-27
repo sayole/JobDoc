@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/widgets/drop_down_input.dart';
@@ -29,7 +30,8 @@ class SubmitWidgets {
     ],
     '링크': '링크 추가하기'
   };
-  static final Map<String, dynamic> dropDownValueList = {
+
+  static final Map<String, List<String>> dropDownValueList = {
     '학력': ['고등학교', '전문대', '학사', '석사', '박사'],
     '재학 상태': ['졸업', '재학'],
     '년차': ['1~2년차', '3~5년차', '6~7년차', '8~11년차', '12년차 이상'],
@@ -37,6 +39,7 @@ class SubmitWidgets {
   };
 
   static List<Widget> infoText(String headline, String caption) {
+    print(dropDownValueList['학력']);
     return [
       SizedBox(height: 20),
       Text(headline, style: LoginStyles.headline),
@@ -73,6 +76,39 @@ class SubmitWidgets {
               borderSide: BorderSide(color: Colors.black),
             ),
           ),
+        ),
+        SizedBox(
+          height: 20,
+        )
+      ],
+    );
+  }
+
+  static Widget submitDropDownField(
+      String widgetName, TextEditingController editingController) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widgetName,
+          style: LoginStyles.textFieldSubtitle,
+        ),
+        DropdownSearch(
+          mode: Mode.MENU,
+          showSelectedItems: true,
+          items: dropDownValueList[widgetName],
+          dropdownSearchDecoration: InputDecoration(
+            hintText: hintValueList[widgetName],
+            hintStyle: LoginStyles.hintStyle,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.black),
+            ),
+          ),
+          // popupItemDisabled: (String s) => s.startsWith('I'),
+          onChanged: (value) {
+            editingController.text = value.toString();
+          },
         ),
         SizedBox(
           height: 20,

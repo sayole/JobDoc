@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class DropdownInput<T> extends StatelessWidget {
   final String hintText;
   final List<T> options;
-  final T value;
+  final T? value;
   final String Function(T) getLabel;
   final void Function(T?) onChanged;
 
   DropdownInput({
-    this.hintText = 'Please select an Option',
+    required this.hintText,
     this.options = const [],
     required this.getLabel,
     required this.value,
