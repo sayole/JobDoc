@@ -20,6 +20,7 @@ class _EducationPageState extends State<EducationPage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+
     service.checkProcessDone();
   }
 
@@ -46,10 +47,9 @@ class _EducationPageState extends State<EducationPage> {
               children: [
                 ...SubmitWidgets.infoText(
                     '최종 학력을 입력해주세요', '작성하는 지금 이 순간 현재 학력이 무엇인지 입력해주세요.'),
-                SubmitWidgets.submitTextField(
-                    "학교 이름을 작성해주세요", schoolNameController),
-                SubmitWidgets.submitTextField("학력", schoolNameController),
-                SubmitWidgets.submitTextField("재학", schoolNameController),
+                SubmitWidgets.submitTextField("학력", groupcontroller),
+                SubmitWidgets.submitTextField("학교명", schoolNameController),
+                SubmitWidgets.submitTextField("재학 상태", statusController),
               ],
             ),
           ),

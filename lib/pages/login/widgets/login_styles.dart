@@ -20,7 +20,6 @@ class LoginStyles {
     color: Color(0xff3d3d3d),
     fontWeight: FontWeight.w400,
     letterSpacing: -0.6,
-    height: 1.5,
     fontSize: 20,
   );
 
@@ -28,7 +27,13 @@ class LoginStyles {
     color: Color(0xffdfdfdf),
     fontWeight: FontWeight.w400,
     letterSpacing: -0.6,
-    height: 1.5,
     fontSize: 20,
+  );
+
+  static final TextStyle textFieldSubtitle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.6,
+    fontSize: 14,
   );
 }
