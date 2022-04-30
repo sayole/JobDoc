@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/widgets/drop_down_input.dart';
 
+import '../../../services/login_process_service.dart';
 import 'login_styles.dart';
 
 class SubmitWidgets {
@@ -15,7 +16,7 @@ class SubmitWidgets {
     '년차': '년차를 선택해주세요',
     '직무': '부서명과 직책을 입력해주세요',
     '고용형태': '고용형태를 선택해 주세요',
-    '스킬셋': '',
+    '스킬셋': '작성하여 추가하기',
     '목표회사': '',
     '입사시기': ['지금 당장 바로 할거에요', '차근차근 준비해나가고 싶어요', '아직은 생각이 없어요'],
     '컨설팅': [
@@ -39,7 +40,6 @@ class SubmitWidgets {
   };
 
   static List<Widget> infoText(String headline, String caption) {
-    print(dropDownValueList['학력']);
     return [
       SizedBox(height: 20),
       Text(headline, style: LoginStyles.headline),
@@ -84,6 +84,7 @@ class SubmitWidgets {
 
   static Widget submitDropDownField(
       String widgetName, TextEditingController editingController) {
+    print(dropDownValueList[widgetName]);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,47 +115,55 @@ class SubmitWidgets {
     );
   }
 
-  static Widget textBox(String inputColor, String inputText) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(
-          width: 1,
-          color: inputColor == 'blue' ? Color(0xff3936f1) : Color(0xffdfdfdf),
+  static Widget textBox(
+      String inputColor, String inputText, Function deleteTextBox) {
+    return IntrinsicWidth(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 1,
+            color: inputColor == 'blue' ? Color(0xff3936f1) : Color(0xffdfdfdf),
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              inputText,
-              // overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 20,
-                color: inputColor == 'blue' ? Color(0xff3936f1) : Colors.black,
-                fontWeight: FontWeight.w600,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 2, 10, 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                inputText,
+                style: TextStyle(
+                  fontSize: 20,
+                  color:
+                      inputColor == 'blue' ? Color(0xff3936f1) : Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            SizedBox(width: 8),
-            inputColor == 'blue'
-                ? Icon(
-                    Icons.clear,
-                    color: Color(0xff3936f1),
-                    size: 20,
-                  )
-                : Icon(
-                    Icons.add,
-                    color: Colors.black,
-                    size: 20,
-                  ),
-          ],
+              SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  //삭제
+                  // inputColor == 'blue'?
+                  deleteTextBox(inputText);
+                },
+                child: inputColor == 'blue'
+                    ? Icon(
+                        Icons.clear,
+                        color: Color(0xff3936f1),
+                        size: 20,
+                      )
+                    : Icon(
+                        Icons.add,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  // static Widget skillSetWidget() {}
 }

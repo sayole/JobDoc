@@ -12,6 +12,20 @@ class LoginProcessSerivce extends ChangeNotifier {
     }
   }
 
+  deleteTextBox(List<String> skillsetList, String thisText) {
+    print('흠');
+    print(thisText);
+    skillsetList.remove(thisText);
+    notifyListeners();
+  }
+
+  makeTextBox(List<String> skillsetList) {
+    skillsetList.add(controllers[0].text);
+    controllers[0].text = '';
+    isDone = true;
+    notifyListeners();
+  }
+
   checkProcessDone() {
     for (var controller in controllers) {
       if (controller.text == '') {

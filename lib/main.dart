@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/pages/login/5_education_page.dart';
+import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: StartingProcess(),
+      home: SkillSetPage(),
     );
   }
 }
