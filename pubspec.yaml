@@ -38,9 +38,11 @@ dependencies:
   firebase_auth: ^3.3.4
   cloud_firestore: ^3.1.4
   provider: ^6.0.2
-  flutter_signin_button: ^2.0.0
   google_sign_in: ^5.3.0
-
+  flutter_animation_progress_bar: ^2.1.1
+  dropdown_search: ^3.0.1
+  flutter_signin_button: ^2.0.0
+  url_launcher: ^6.1.0
 
 
 dev_dependencies:
@@ -92,6 +94,10 @@ flutter:
     - assets/images/done_image.png
     - assets/images/logo.png
     - assets/images/sign_in_image.png
+    - assets/icons/google_logo.png
+    - assets/icons/facebook_logo.png
+    - assets/icons/apple_logo.png
+    - assets/images/blue_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

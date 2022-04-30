@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/models/user_data.dart';
-import 'package:job_doc/pages/main_home_type2.dart';
-import 'package:job_doc/pages/main_home_type3.dart';
-import 'package:job_doc/pages/main_home_type4.dart';
+import 'main_home_type2.dart';
+import 'main_home_type3.dart';
+import 'main_home_type4.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -28,8 +28,9 @@ class _MainPageState extends State<MainPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FlutterLogo(size: 40),
-                        Text("~~~하는\n유예지님 환영해요",
+                        Image(image: AssetImage('assets/images/blue_logo.png')),
+                        SizedBox(height: 30),
+                        Text("멋진 미래를 꿈꾸는\n유예지님 환영해요",
                             style: TextStyle(
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w700,
@@ -55,7 +56,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ), // 1번 끝
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Type2(),
                 Type3(),
                 Type4(),

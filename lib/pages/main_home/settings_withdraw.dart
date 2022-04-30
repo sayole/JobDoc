@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:job_doc/pages/main_home.dart';
-import 'package:job_doc/pages/main_home_type1.dart';
+import 'package:job_doc/pages/main_home/main_home.dart';
+import 'main_home_type1.dart';
 
 class withDraw extends StatelessWidget {
   const withDraw({Key? key}) : super(key: key);

@@ -27,13 +27,17 @@ class Type2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('예지님을 기다리고 있는\n컨설턴트',
-                  style: TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  )),
-              SizedBox(width: 120),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text('예지님을 기다리고 있는\n컨설턴트',
+                    style: TextStyle(
+                      fontFamily: 'Pretendard',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.6,
+                    )),
+              ),
+              SizedBox(width: 80),
               GestureDetector(
                 onTap: () {
                   print('나의 견적으로 이동');

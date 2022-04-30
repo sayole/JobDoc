@@ -15,8 +15,6 @@ class UserData {
   String careerCompany;
   //연차
   String careerYears;
-  //재직상태
-  String careerStatus;
   //직무
   String careerPart;
   //고용형태
@@ -53,7 +51,6 @@ class UserData {
     this.educationStatus = '',
     this.careerCompany = '',
     this.careerYears = '',
-    this.careerStatus = '',
     this.careerPart = '',
     this.careerType = '',
     this.skillSet = '',

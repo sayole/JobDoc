@@ -4,12 +4,13 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:job_doc/models/user_data.dart';
-import 'package:job_doc/pages/main_home_type2.dart';
-import 'package:job_doc/pages/main_home_type3.dart';
-import 'package:job_doc/pages/main_home_type4.dart';
+import 'main_home_type2.dart';
+import 'main_home_type3.dart';
+import 'main_home_type4.dart';
 import 'package:job_doc/pages/settings.dart';
 
 import 'main_home_type1.dart';
+import 'settings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(
         index: currentIndex,
         children: [
-          MainPage(),
-          Text('2'),
-          Text('3'),
+          MainPage(), // tpye1
+          Text('333'), // 프로포절 페이지
+          Text('3'), // 내정보 페이지
           SettingPage(),
         ],
       ),
@@ -50,27 +51,35 @@ class _HomePageState extends State<HomePage> {
             currentIndex = newIndex;
           });
         },
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-              icon: currentIndex == 0 ?
-              Image(
-                image: AssetImage('assets/icons/home_chosen.png'),
-              ),
-              label: '홈')
-              : Icon(Icons.Icons.abc_outlined), label: '홈'),
-              
+        currentIndex: currentIndex,
+        items: [
           BottomNavigationBarItem(
               icon: Image(
-                  image: AssetImage('assets/icons/proposal_not_chosen.png')),
+                image: AssetImage(currentIndex == 0
+                    ? 'assets/icons/home_chosen.png'
+                    : 'assets/icons/home_not_chosen.png'),
+              ),
+              label: '홈'),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage(currentIndex == 1
+                    ? 'assets/icons/proposal_chosen.png'
+                    : 'assets/icons/proposal_not_chosen.png'),
+              ),
               label: '나의 견적'),
           BottomNavigationBarItem(
               icon: Image(
-                  image: AssetImage('assets/icons/my_page_not_chosen.png')),
+                image: AssetImage(currentIndex == 2
+                    ? 'assets/icons/my_page_chosen.png'
+                    : 'assets/icons/my_page_not_chosen.png'),
+              ),
               label: '내정보'),
           BottomNavigationBarItem(
               icon: Image(
-                  image: AssetImage('assets/icons/setting_not_chosen.png')),
+                image: AssetImage(currentIndex == 3
+                    ? 'assets/icons/setting_chosen.png'
+                    : 'assets/icons/setting_not_chosen.png'),
+              ),
               label: '환경 설정'),
         ],
       ),
