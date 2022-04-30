@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
+import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/login_process_service.dart';
 import 'login_process_scaffold.dart';
 
 class JobPostingPage extends StatefulWidget {
@@ -11,14 +14,30 @@ class JobPostingPage extends StatefulWidget {
 }
 
 class _JobPostingPageState extends State<JobPostingPage> {
-  List<String> postController = [];
+  // List<String> postController = [];
+  TextEditingController postController = TextEditingController();
+
+  void checkProcessDone() {
+    LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    service.checkProcessDone();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    postController.addListener(checkProcessDone);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LoginProcessScaffold(
-      body: Text('hello'),
-      nextPage: DoneLoading(),
-      index: 7,
-    );
+    return Consumer<LoginProcessSerivce>(
+        builder: (context, loginProcessService, child) {
+      loginProcessService.addControllers([postController]);
+      return LoginProcessScaffold(
+        body: SubmitWidgets.submitPostTextField(postController),
+        nextPage: DoneLoading(),
+        index: 7,
+      );
+    });
   }
 }

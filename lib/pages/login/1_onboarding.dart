@@ -30,7 +30,7 @@ class OnBoarding extends StatelessWidget {
                   SizedBox(
                     height: 70,
                   ),
-                  Image.asset('assets/logo.png')
+                  Image.asset('assets/images/logo.png')
                 ],
               ),
               Positioned(

@@ -116,7 +116,7 @@ class SubmitWidgets {
   }
 
   static Widget textBox(
-      String inputColor, String inputText, Function deleteTextBox) {
+      bool selected, String inputText, Function deleteTextBox) {
     return IntrinsicWidth(
       child: Container(
         decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class SubmitWidgets {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             width: 1,
-            color: inputColor == 'blue' ? Color(0xff3936f1) : Color(0xffdfdfdf),
+            color: selected == true ? Color(0xff3936f1) : Color(0xffdfdfdf),
           ),
         ),
         child: Padding(
@@ -136,9 +136,9 @@ class SubmitWidgets {
                 inputText,
                 style: TextStyle(
                   fontSize: 20,
-                  color:
-                      inputColor == 'blue' ? Color(0xff3936f1) : Colors.black,
-                  fontWeight: FontWeight.w600,
+                  color: selected == true ? Color(0xff3936f1) : Colors.black,
+                  fontWeight:
+                      selected == true ? FontWeight.w600 : FontWeight.w400,
                 ),
               ),
               SizedBox(width: 8),
@@ -148,7 +148,7 @@ class SubmitWidgets {
                   // inputColor == 'blue'?
                   deleteTextBox(inputText);
                 },
-                child: inputColor == 'blue'
+                child: selected == true
                     ? Icon(
                         Icons.clear,
                         color: Color(0xff3936f1),
@@ -164,6 +164,29 @@ class SubmitWidgets {
           ),
         ),
       ),
+    );
+  }
+
+  static Widget submitPostTextField(TextEditingController editingController) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: editingController,
+          style: LoginStyles.inputStyle,
+          decoration: InputDecoration(
+              hintText: hintValueList['링크'],
+              hintStyle: LoginStyles.hintStyle,
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              prefixIcon: Icon(Icons.add)),
+        ),
+        SizedBox(
+          height: 20,
+        )
+      ],
     );
   }
 }

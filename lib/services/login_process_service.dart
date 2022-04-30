@@ -12,9 +12,17 @@ class LoginProcessSerivce extends ChangeNotifier {
     }
   }
 
+  updateTextBox(List<String> companys) {
+    print(companys);
+    if (companys.length == 0) {
+      isDone = false;
+    } else {
+      isDone = true;
+    }
+    notifyListeners();
+  }
+
   deleteTextBox(List<String> skillsetList, String thisText) {
-    print('흠');
-    print(thisText);
     skillsetList.remove(thisText);
     notifyListeners();
   }

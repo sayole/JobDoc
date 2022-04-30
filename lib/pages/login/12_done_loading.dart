@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/main_home/main_home_type1.dart';
 
 class DoneLoading extends StatelessWidget {
   const DoneLoading({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class DoneLoading extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 20),
-                  Image.asset('assets/done_image.png', width: 300, height: 420),
+                  Image.asset('assets/images/done_image.png',
+                      width: 300, height: 420),
                   SizedBox(height: 10),
                   Text(
                     "1-2일 내로 컨설턴트가\n제안서를 작성하면 알려드릴게요",
@@ -36,7 +38,8 @@ class DoneLoading extends StatelessWidget {
                 right: 16,
                 child: GestureDetector(
                   onTap: () {
-                    print("프로필 작성하기 클릭 됨");
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => MainPage()));
                   },
                   child: Container(
                     width: double.infinity,

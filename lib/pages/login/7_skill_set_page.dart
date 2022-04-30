@@ -93,7 +93,6 @@ class _SkillSetPageState extends State<SkillSetPage> {
                                   onTap: () {
                                     loginProcessService
                                         .makeTextBox(skillSetList);
-                                    print('viewci');
                                   },
                                   child: Icon(
                                     Icons.add,
@@ -116,7 +115,7 @@ class _SkillSetPageState extends State<SkillSetPage> {
                       runSpacing: 10,
                       children: [
                         ...skillSetList.map((e) =>
-                            SubmitWidgets.textBox('blue', e, deleteSkillSet))
+                            SubmitWidgets.textBox(true, e, deleteSkillSet))
                       ],
                     ),
                   ),
