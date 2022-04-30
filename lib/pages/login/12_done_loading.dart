@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/main_home/main_home.dart';
 import 'package:job_doc/pages/main_home/main_home_type1.dart';
-
-import '../main_home/main_home.dart';
 
 class DoneLoading extends StatelessWidget {
   const DoneLoading({Key? key}) : super(key: key);

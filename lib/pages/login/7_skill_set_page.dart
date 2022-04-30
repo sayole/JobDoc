@@ -71,8 +71,6 @@ class _SkillSetPageState extends State<SkillSetPage> {
                                   child: IntrinsicWidth(
                                     child: TextField(
                                       controller: skillController,
-                                      // onSubmitted: loginProcessService
-                                      //     .makeTextBox(skillSetList),
                                       style: LoginStyles.inputStyle,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
@@ -110,8 +108,8 @@ class _SkillSetPageState extends State<SkillSetPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Wrap(
-                      alignment: WrapAlignment.start, // 정렬 방식
-                      spacing: 10, // 상하(좌우) 공간
+                      alignment: WrapAlignment.start,
+                      spacing: 10,
                       runSpacing: 10,
                       children: [
                         ...skillSetList.map((e) =>
