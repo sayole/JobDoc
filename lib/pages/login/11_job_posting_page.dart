@@ -34,7 +34,18 @@ class _JobPostingPageState extends State<JobPostingPage> {
         builder: (context, loginProcessService, child) {
       loginProcessService.addControllers([postController]);
       return LoginProcessScaffold(
-        body: SubmitWidgets.submitPostTextField(postController),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...SubmitWidgets.infoText('마지막으로 마음 속 담아둔 공고가 있으시다면 알려주세요!',
+                  '컨설턴트와 첫 상담 시 참고될 내용이에요. 나중에 컨설턴트에게 직접 알려주셔도 좋아요'),
+              SubmitWidgets.submitPostTextField(postController),
+            ],
+          ),
+        ),
         nextPage: DoneLoading(),
         index: 7,
       );

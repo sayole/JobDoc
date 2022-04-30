@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/login/11_job_posting_page.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/1_onboarding.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
@@ -10,6 +11,8 @@ import 'package:job_doc/pages/login/8_wishing_company_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:provider/provider.dart';
+
+import 'pages/main_home/main_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WishingCompanyPage(),
+      home: HomePage(),
     );
   }
 }
