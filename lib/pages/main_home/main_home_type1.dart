@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/models/user_data.dart';
+import '../proposal/proposal_list.dart';
 import 'main_home_type2.dart';
 import 'main_home_type3.dart';
 import 'main_home_type4.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  MainPage({
+    Key? key,
+    required this.indexFunction, //이부분
+  }) : super(key: key);
+
+  final Function? indexFunction; // 이부분
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -39,12 +45,17 @@ class _MainPageState extends State<MainPage> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("내 이력서 수정하기",
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14,
-                                    color: Color(0xFFF3936F1))),
+                            GestureDetector(
+                              child: Text("내 이력서 수정하기",
+                                  style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14,
+                                      color: Color(0xFFF3936F1))),
+                              onTap: () {
+                                widget.indexFunction!(); //이렇게 붙이기
+                              },
+                            ),
                             Image(
                                 image:
                                     AssetImage('assets/icons/right_arrow.png'),
@@ -59,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                 SizedBox(height: 30),
                 Type2(),
                 Type3(),
-                Type4(),
+                // Type4(),
               ],
             ),
           )

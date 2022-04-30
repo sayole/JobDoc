@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/proposal/proposal_list.dart';
 
 List card_colors = [
   0xFFF817BFA,
@@ -40,6 +41,11 @@ class Type2 extends StatelessWidget {
               SizedBox(width: 80),
               GestureDetector(
                 onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => ProposalList()),
+                  // );
+
                   print('나의 견적으로 이동');
                 },
                 child: Text('모아보기',
@@ -57,6 +63,10 @@ class Type2 extends StatelessWidget {
           ),
         ),
         SizedBox(height: 12),
+        // 파이어스토어와 연동하여 데이터를 가져오고, 파이어스토어에 필드를 추가해서 트루인 것만 가져오고 나오게 처리
+        // 특정 필드가 트루인 것들만 가져오기, 파이어스토어 쿼리
+        // 데이터 연동 이후
+        // 선별적으로 가여조고, 리스트 뷰 빌더로 쓰기
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

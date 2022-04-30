@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:job_doc/models/user_data.dart';
+import '../proposal/proposal_list.dart';
 import 'main_home_type2.dart';
 import 'main_home_type3.dart';
 import 'main_home_type4.dart';
@@ -33,8 +34,12 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(
         index: currentIndex,
         children: [
-          MainPage(), // tpye1
-          Text('333'), // 프로포절 페이지
+          MainPage(indexFunction: () {
+            setState(() {
+              currentIndex = 2;
+            });
+          }), // tpye1
+          ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
           Text('3'), // 내정보 페이지
           SettingPage(),
         ],
