@@ -8,6 +8,7 @@ import 'package:job_doc/pages/login/4_name_page.dart';
 import 'package:job_doc/pages/login/5_education_page.dart';
 import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/pages/login/8_wishing_company_page.dart';
+import 'package:job_doc/pages/login/9_wishing_join_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: HomePage(),
+      home: StartingProcess(),
     );
   }
 }
