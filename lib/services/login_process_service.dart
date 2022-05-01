@@ -12,9 +12,8 @@ class LoginProcessSerivce extends ChangeNotifier {
     }
   }
 
-  updateTextBox(List<String> companys) {
-    print(companys);
-    if (companys.length == 0) {
+  updateTextBox(List<String> valueList) {
+    if (valueList.length == 0) {
       isDone = false;
     } else {
       isDone = true;
@@ -22,8 +21,9 @@ class LoginProcessSerivce extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteTextBox(List<String> skillsetList, String thisText) {
-    skillsetList.remove(thisText);
+  deleteTextBox(List<String> valueList, String thisText) {
+    valueList.remove(thisText);
+    if (valueList.length == 0) isDone = false;
     notifyListeners();
   }
 

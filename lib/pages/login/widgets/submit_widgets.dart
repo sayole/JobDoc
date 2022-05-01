@@ -167,22 +167,49 @@ class SubmitWidgets {
     );
   }
 
-  static Widget submitPostTextField(TextEditingController editingController) {
+  static Widget submitPostTextField(List<String> postList,
+      TextEditingController editingController, Function deletePost) {
+    Widget inputedPosts() {
+      return Row(children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.black,
+              width: 1,
+            ))),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(editingController.text,
+                        style: LoginStyles.inputStyle)),
+                GestureDetector(
+                    onTap: () => deletePost(), child: Icon(Icons.clear)),
+              ],
+            ),
+          ),
+        ),
+      ]);
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        inputedPosts(),
         TextField(
-          controller: editingController,
-          style: LoginStyles.inputStyle,
-          decoration: InputDecoration(
+            controller: editingController,
+            style: LoginStyles.inputStyle,
+            decoration: InputDecoration(
               hintText: hintValueList['링크'],
               hintStyle: LoginStyles.hintStyle,
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black),
               ),
-              prefixIcon: Icon(Icons.add)),
-        ),
+              suffixIcon: GestureDetector(child: Icon(Icons.add)),
+            )),
         SizedBox(
           height: 20,
         )
