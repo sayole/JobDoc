@@ -4,7 +4,7 @@ import '../pages/main_home/settings.dart';
 import '../pages/myPage/my_page.dart';
 import '../pages/proposal/proposal_list.dart';
 
-class btmNavProvider extends ChangeNotifier {
+class BtmNavProvider extends ChangeNotifier {
   int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;

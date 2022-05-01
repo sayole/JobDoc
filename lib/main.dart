@@ -2,20 +2,12 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:job_doc/pages/login/11_job_posting_page.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
-import 'package:job_doc/pages/login/1_onboarding.dart';
-import 'package:job_doc/pages/login/3_starting_process.dart';
-import 'package:job_doc/pages/login/4_name_page.dart';
-import 'package:job_doc/pages/login/5_education_page.dart';
-import 'package:job_doc/pages/login/7_skill_set_page.dart';
-import 'package:job_doc/pages/login/8_wishing_company_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'pages/main_home/main_home.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -75,7 +67,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => LoginProcessSerivce()),
-        ChangeNotifierProvider(create: (context) => btmNavProvider())
+        ChangeNotifierProvider(create: (context) => BtmNavProvider())
       ],
       child: const MyApp(),
     ),
@@ -113,7 +105,6 @@ class _MyAppState extends State<MyApp> {
                 channel.id,
                 channel.name,
                 channelDescription: channel.description,
-                icon: "launcher_icon",
                 // other properties...
               ),
             ),

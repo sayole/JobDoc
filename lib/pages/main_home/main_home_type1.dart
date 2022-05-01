@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/models/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:job_doc/services/bottomnavi_service.dart';
+import 'package:provider/provider.dart';
 import 'main_home_type2.dart';
 import 'main_home_type3.dart';
 import 'main_home_type4.dart';
 
 List card_list = [];
-
 List card_colors = [
   0xFFF817BFA,
   0xFFF9680EF,
@@ -23,7 +24,6 @@ List card_colors = [
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
-
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -31,45 +31,44 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    final btmNav = Provider.of<BtmNavProvider>(context, listen: true);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 40),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, left: 24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image(
-                        image: AssetImage('assets/images/blue_logo.png'),
-                        width: 75,
-                        height: 50),
-                    SizedBox(height: 30),
-                    Text("더 멋진 미래를 꿈꾸는\n유예지님 환영해요!",
-                        style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 26)),
-                    SizedBox(height: 4),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("내 이력서 수정하기",
-                            style: TextStyle(
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                                color: Color(0xFFF3936F1))),
-                        Image(
-                            image: AssetImage('assets/icons/right_arrow.png'),
-                            width: 16,
-                            height: 16)
-                      ],
-                    ),
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image(
+                      image: AssetImage('assets/images/blue_logo.png'),
+                      width: 75,
+                      height: 50),
+                  SizedBox(height: 30),
+                  Text("더 멋진 미래를 꿈꾸는\n유예지님 환영해요!",
+                      style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 26)),
+                  SizedBox(height: 4),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("내 이력서 수정하기",
+                          style: TextStyle(
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Color(0xFFF3936F1))),
+                      Image(
+                          image: AssetImage('assets/icons/right_arrow.png'),
+                          width: 16,
+                          height: 16)
+                    ],
+                  ),
+                ],
               ),
             ), // 1번 끝
             SizedBox(height: 40),
@@ -91,9 +90,7 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              print('나의 견적으로 이동');
-                            },
+                            onTap: () => btmNav.changeIndex(1),
                             child: Text('모아보기',
                                 style: TextStyle(
                                     fontFamily: 'Pretendard',
@@ -164,10 +161,8 @@ class proposal_main_card extends StatelessWidget {
   late String card_text;
   late String card_amount;
   late int card_colors;
-
   proposal_main_card(this.card_title, this.card_tag, this.card_text,
       this.card_amount, this.card_colors);
-
   @override
   Widget build(BuildContext context) {
     return Container(
