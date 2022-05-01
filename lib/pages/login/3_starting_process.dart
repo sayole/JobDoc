@@ -1,10 +1,23 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/4_name_page.dart';
 import 'package:job_doc/pages/login/5_education_page.dart';
 import 'package:job_doc/pages/login/widgets/login_styles.dart';
 
-class StartingProcess extends StatelessWidget {
+class StartingProcess extends StatefulWidget {
   const StartingProcess({Key? key}) : super(key: key);
+
+  @override
+  State<StartingProcess> createState() => _StartingProcessState();
+}
+
+class _StartingProcessState extends State<StartingProcess> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // FirebaseMessaging.instance.getToken();
+  }
 
   @override
   Widget build(BuildContext context) {
