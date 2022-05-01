@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/11_job_posting_page.dart';
@@ -9,6 +11,7 @@ import 'package:job_doc/pages/login/5_education_page.dart';
 import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/pages/login/8_wishing_company_page.dart';
 import 'package:job_doc/services/auth_service.dart';
+import 'package:job_doc/services/bottomnavi_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -72,6 +75,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => LoginProcessSerivce()),
+        ChangeNotifierProvider(create: (context) => btmNavProvider())
       ],
       child: const MyApp(),
     ),

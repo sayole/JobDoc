@@ -47,7 +47,7 @@ class _MainPageState extends State<MainPage> {
                         width: 75,
                         height: 50),
                     SizedBox(height: 30),
-                    Text("즐거운 하루를 보내는\n유예지님 환영해요!",
+                    Text("더 멋진 미래를 꿈꾸는\n유예지님 환영해요!",
                         style: TextStyle(
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,

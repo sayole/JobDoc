@@ -4,6 +4,8 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:job_doc/models/user_data.dart';
+import 'package:job_doc/services/bottomnavi_service.dart';
+import 'package:provider/provider.dart';
 import '../myPage/my_page.dart';
 import '../proposal/proposal_list.dart';
 import 'main_home_type2.dart';
@@ -27,35 +29,13 @@ class _HomePageState extends State<HomePage> {
   GoogleSignIn googleSignIn = GoogleSignIn();
 
   int currentIndex = 0; // 처음에 나올 화면 지정
-  List<String> pageNameList = ['홈', '나의 견적', '내정보', '환경 설정'];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: [
-          MainPage(), // tpye1
-          ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
-          mypage(),
-          // 내정보 페이지
-          SettingPage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: const TextStyle(color: Colors.white),
-        unselectedLabelStyle: const TextStyle(color: Colors.grey),
-        selectedItemColor: Color(0xFFF3936F1),
-        unselectedItemColor: Colors.grey,
-        onTap: (int newIndex) {
-          setState(() {
-            currentIndex = newIndex;
-          });
-        },
-        currentIndex: currentIndex,
-        items: [
+    return Consumer<btmNavProvider>(
+      builder: (context, btmNav, child) {
+        final btmNav = Provider.of<btmNavProvider>(context, listen: true);
+        List<BottomNavigationBarItem> btmNavItems = [
           BottomNavigationBarItem(
               icon: Image(
                 image: AssetImage(currentIndex == 0
@@ -84,8 +64,31 @@ class _HomePageState extends State<HomePage> {
                     : 'assets/icons/setting_not_chosen.png'),
               ),
               label: '환경 설정'),
-        ],
-      ),
+        ];
+
+        return Scaffold(
+          body: IndexedStack(
+            index: currentIndex,
+            children: [
+              MainPage(), // tpye1
+              ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
+              mypage(), // 내정보 페이지
+              SettingPage(),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: const TextStyle(color: Colors.white),
+            unselectedLabelStyle: const TextStyle(color: Colors.grey),
+            selectedItemColor: Color(0xFFF3936F1),
+            unselectedItemColor: Colors.grey,
+            onTap: btmNav.changeIndex,
+            currentIndex: btmNav.selectedIndex,
+            items: btmNavItems,
+          ),
+        );
+      },
     );
   }
 }
