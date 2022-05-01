@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JobDoc</string>
+    <string name="facebook_app_id">321214563474746</string>
+    <string name="fb_login_protocol_scheme">fb321214563474746</string>
+    <string name="facebook_client_token">6fb6a46a1139653817198ad67398da25</string>
+</resources>

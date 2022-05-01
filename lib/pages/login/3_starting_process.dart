@@ -10,13 +10,7 @@ class StartingProcess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Image.asset(
-            'assets/icons/left_arrow.png',
-            width: MediaQuery.of(context).size.width * 0.06,
-          ),
-          onPressed: () => {Navigator.pop(context)},
-        ),
+        leading: Text(''),
         elevation: 0,
       ),
       body: SafeArea(

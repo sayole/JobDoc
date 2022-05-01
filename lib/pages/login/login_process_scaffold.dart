@@ -108,7 +108,7 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                         ),
                       ),
                       Container(
-                        height: 20,
+                        height: MediaQuery.of(context).size.height * 0.06,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ],

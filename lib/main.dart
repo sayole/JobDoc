@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/11_job_posting_page.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/1_onboarding.dart';
+import 'package:job_doc/pages/login/2_sign_in.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
 import 'package:job_doc/pages/login/4_name_page.dart';
 import 'package:job_doc/pages/login/5_education_page.dart';
@@ -35,14 +36,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-        fontFamily: 'Pretendard',
-        primaryColor: Colors.white,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: StartingProcess(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+          fontFamily: 'Pretendard',
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: SignIn());
   }
 }

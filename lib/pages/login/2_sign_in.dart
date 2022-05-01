@@ -1,7 +1,10 @@
 //회원가입 페이지
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -14,12 +17,141 @@ class _SignInState extends State<SignIn> {
   TapGestureRecognizer privacyLinkRecognizer = TapGestureRecognizer();
   TapGestureRecognizer usageLinkRecognizer = TapGestureRecognizer();
 
+  void GoogleLogin() async {
+    AuthService service = context.read<AuthService>();
+    final myuser = await service.signInWithGoogle();
+    if (myuser == null) {
+      return;
+    }
+    print('myuser');
+    print(myuser);
+    NextPage();
+  }
+
+  void FaceBookLogin() async {
+    AuthService service = context.read<AuthService>();
+    final myuser = await service.signInWithFacebook();
+    if (myuser == null) {
+      return;
+    }
+    print('myuser');
+    print(myuser);
+    final a = service.currentUser();
+    print(a?.uid);
+    NextPage();
+  }
+
   void NextPage() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => PrivacyPolicy()),
-    // );
-    print('next');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => StartingProcess()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          Text(
+                            "빠르게 이직 컨설팅 받고",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            "퀀텀 점프하기",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/sign_in_image.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('google'), GoogleLogin()},
+                      child: LoginButton('google'),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('apple'), FaceBookLogin()},
+                      child: LoginButton('apple'),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('facebook'), FaceBookLogin()},
+                      child: LoginButton('facebook'),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                        children: [
+                          TextSpan(text: "회원가입 시 "),
+                          TextSpan(
+                            text: '개인정보 처리 방침',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                            recognizer: privacyLinkRecognizer
+                              ..onTap = () => {print('privacy')},
+                          ),
+                          TextSpan(text: '을 읽었으며,\n  '),
+                          TextSpan(
+                            text: '이용약관',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                            recognizer: usageLinkRecognizer
+                              ..onTap = () => {print('usage')},
+                          ),
+                          TextSpan(text: "에 동의하신 것으로 간주합니다."),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget LoginButton(String type) {
@@ -93,112 +225,6 @@ class _SignInState extends State<SignIn> {
           height: 16,
         )
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Text(
-                            "빠르게 이직 컨설팅 받고",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            "퀀텀 점프하기",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Image.asset(
-                        'assets/images/sign_in_image.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('google'), NextPage()},
-                      child: LoginButton('google'),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('apple'), NextPage()},
-                      child: LoginButton('apple'),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('facebook'), NextPage()},
-                      child: LoginButton('facebook'),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
-                        children: [
-                          TextSpan(text: "회원가입 시 "),
-                          TextSpan(
-                            text: '개인정보 처리 방침',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
-                            ),
-                            recognizer: privacyLinkRecognizer
-                              ..onTap = () => {print('privacy')},
-                          ),
-                          TextSpan(text: '을 읽었으며,\n  '),
-                          TextSpan(
-                            text: '이용약관',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
-                            ),
-                            recognizer: usageLinkRecognizer
-                              ..onTap = () => {print('usage')},
-                          ),
-                          TextSpan(text: "에 동의하신 것으로 간주합니다."),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
