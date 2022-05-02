@@ -84,7 +84,7 @@ class SubmitWidgets {
 
   static Widget submitDropDownField(
       String widgetName, TextEditingController editingController) {
-    print(dropDownValueList[widgetName]);
+    print(dropDownValueList[widgetName]?.length);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -76,6 +76,7 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                       GestureDetector(
                         onTap: loginProcessService.isDone
                             ? () => {
+                                  loginProcessService.isDone = false,
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

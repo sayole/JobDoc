@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../myPage/my_page.dart';
 import 'main_home_type1.dart';
 import 'settings_withdraw.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -60,10 +66,7 @@ class _SettingPageState extends State<SettingPage> {
                   height: 20,
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => withDraw()),
-                  );
+                  print("감사합니다 수정하시오");
                 },
               ),
               SizedBox(height: 40),
@@ -113,10 +116,11 @@ class _SettingPageState extends State<SettingPage> {
                       fontFamily: 'Pretendard'),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => withDraw()),
-                  );
+                  Share.share(
+                      Platform.environment == Platform.isAndroid
+                          ? 'https://www.naver.com/' // 플레이스토어 앱 링크
+                          : 'https://www.google.com/', // 앱스토어 링크
+                      subject: '잡닥, 커리어 매칭 플랫폼');
                 },
               ),
               // 로그아웃
@@ -195,7 +199,9 @@ class _SettingPageState extends State<SettingPage> {
                   width: 20,
                   height: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  launch("http://pf.kakao.com/_YxmxgUb/chat");
+                },
               ),
               //이용 약관
               ListTile(
@@ -213,7 +219,10 @@ class _SettingPageState extends State<SettingPage> {
                   width: 20,
                   height: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  launch(
+                      "https://hampaper.notion.site/e92066c2ea8e4cc48231e8d5ee10db98");
+                },
               ),
             ],
           ),
