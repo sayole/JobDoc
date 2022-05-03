@@ -1,6 +1,6 @@
 class UserData {
   //firebase authentication 상의 UID
-  String uid;
+  String? uid;
   //성함
   String name;
 

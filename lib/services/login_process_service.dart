@@ -4,6 +4,12 @@ class LoginProcessSerivce extends ChangeNotifier {
   List<dynamic> controllers = [];
   bool isDone = false;
 
+  void addConrtrollersData() {
+    for (dynamic singleController in controllers) {
+      controllers.add(singleController);
+    }
+  }
+
   void addControllers(List<dynamic> localControllers) {
     controllers.clear();
 
@@ -33,9 +39,10 @@ class LoginProcessSerivce extends ChangeNotifier {
     notifyListeners();
   }
 
-  makeTextBox(List<String> skillsetList) {
+  makeTextBox(List<String> skillsetList, Function updateData) {
     skillsetList.add(controllers[0].text);
     controllers[0].text = '';
+    updateData();
     isDone = true;
     notifyListeners();
   }

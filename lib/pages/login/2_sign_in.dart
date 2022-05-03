@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/pages/myPage/my_page.dart';
 import 'package:job_doc/services/auth_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
@@ -17,34 +19,47 @@ class _SignInState extends State<SignIn> {
   TapGestureRecognizer privacyLinkRecognizer = TapGestureRecognizer();
   TapGestureRecognizer usageLinkRecognizer = TapGestureRecognizer();
 
-  void GoogleLogin() async {
-    AuthService service = context.read<AuthService>();
-    final myuser = await service.signInWithGoogle();
+  void googleLogin() async {
+    AuthService authService = context.read<AuthService>();
+
+    final myuser = await authService.signInWithGoogle();
     if (myuser == null) {
       return;
     }
-    print('myuser');
-    print(myuser);
-    NextPage();
+    checkHaveUserdata();
   }
 
-  void FaceBookLogin() async {
+  void faceBookLogin() async {
     AuthService service = context.read<AuthService>();
     final myuser = await service.signInWithFacebook();
     if (myuser == null) {
       return;
     }
-    print('myuser');
-    print(myuser);
-    final a = service.currentUser();
-    print(a?.uid);
-    NextPage();
+    checkHaveUserdata();
   }
 
-  void NextPage() {
+  void checkHaveUserdata() async {
+    UserService service = context.read<UserService>();
+    await service.checkHaveUserData().then((value) {
+      if (value == true) {
+        toMainPage();
+      } else {
+        nextPage();
+      }
+    });
+  }
+
+  void nextPage() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => StartingProcess()),
+    );
+  }
+
+  void toMainPage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MyPage()),
     );
   }
 
@@ -101,15 +116,15 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => {print('google'), GoogleLogin()},
+                      onTap: () => {print('google'), googleLogin()},
                       child: LoginButton('google'),
                     ),
                     GestureDetector(
-                      onTap: () => {print('apple'), FaceBookLogin()},
+                      onTap: () => {print('apple'), faceBookLogin()},
                       child: LoginButton('apple'),
                     ),
                     GestureDetector(
-                      onTap: () => {print('facebook'), FaceBookLogin()},
+                      onTap: () => {print('facebook'), faceBookLogin()},
                       child: LoginButton('facebook'),
                     ),
                     RichText(

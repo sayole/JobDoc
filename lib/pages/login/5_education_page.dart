@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/6_career_page.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import '../../services/login_process_service.dart';
 import 'login_process_scaffold.dart';
@@ -19,6 +20,10 @@ class _EducationPageState extends State<EducationPage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.educationGroup = groupcontroller.text;
+    userService.thisUser.educationSchoolName = schoolNameController.text;
+    userService.thisUser.educationStatus = statusController.text;
     service.checkProcessDone();
   }
 

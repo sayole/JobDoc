@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/9_wishing_join_page.dart';
 import 'package:job_doc/pages/login/widgets/login_styles.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/login_process_service.dart';
@@ -48,6 +49,8 @@ class _WishingCompanyPageState extends State<WishingCompanyPage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingCompany = companys;
     service.checkProcessDone();
   }
 
@@ -80,6 +83,8 @@ class _WishingCompanyPageState extends State<WishingCompanyPage> {
       companys.removeAt(i);
       selectedListMap.elementAt(index)['selected'] = false;
     }
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingCompany = companys;
     service.updateTextBox(companys);
   }
 

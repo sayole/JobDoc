@@ -6,34 +6,34 @@ import 'package:job_doc/models/user_data.dart';
 class UserService extends ChangeNotifier {
   final userCollection = FirebaseFirestore.instance.collection('user');
   List<Map<String, dynamic>> userData = [];
+  UserData thisUser = UserData();
 
   User? currentUser() {
     // 현재 유저(로그인 되지 않은 경우 null 반환)
     return FirebaseAuth.instance.currentUser;
   }
 
-  Future<QuerySnapshot> getUser() async {
-    return userCollection.where('uid', isEqualTo: 'a').get();
+  void getUserData() async {
+    QuerySnapshot snapshot =
+        await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
+    print('-------------------------------------------------');
+    print(snapshot.docs[0].data());
+  }
+
+  Future<bool> checkHaveUserData() async {
+    QuerySnapshot snapshot =
+        await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
+    print('aksdfj;lskdfj;aldfja;ldkfjad');
+    if (snapshot.docs.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   void createUser() async {
-    // UserData _user = UserData();
-    // _user.uid = 'a';
-    // _user.name = 'a';
-    // _user.educationGroup = 'a';
-    // _user.educationSchoolName = 'a';
-    // _user.educationStatus = 'a';
-    // _user.careerCompany = 'a';
-    // _user.careerYears = 'a';
-    // _user.careerPart = 'a';
-    // _user.careerType = 'a';
-    // _user.skillSet = ['a', 'b', 'c'];
-    // _user.wishingCompany = ['a', 'b', 'c'];
-    // _user.wishingJoinDate = ['a', 'b', 'c'];
-    // _user.wishingConsulting = ['a', 'b', 'c'];
-
-    // await userCollection.add(_user.toJson());
-    print('yeah');
+    var returnValue = await userCollection.add(thisUser.toJson());
+    print(returnValue);
     notifyListeners();
   }
 

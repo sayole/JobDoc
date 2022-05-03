@@ -75,6 +75,7 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                                     MaterialPageRoute(
                                         builder: (context) => widget.nextPage),
                                   ),
+                                  loginProcessService
                                 }
                             : null,
                         child: Container(

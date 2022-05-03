@@ -4,9 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/2_sign_in.dart';
+import 'package:job_doc/pages/login/3_starting_process.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -68,7 +70,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => LoginProcessSerivce()),
-        ChangeNotifierProvider(create: (context) => BtmNavProvider())
+        ChangeNotifierProvider(create: (context) => BtmNavProvider()),
+        ChangeNotifierProvider(create: (context) => UserService())
       ],
       child: const MyApp(),
     ),

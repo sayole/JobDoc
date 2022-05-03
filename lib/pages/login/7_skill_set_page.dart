@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/8_wishing_company_page.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/login_process_service.dart';
@@ -16,23 +17,23 @@ class SkillSetPage extends StatefulWidget {
 
 class _SkillSetPageState extends State<SkillSetPage> {
   TextEditingController skillController = TextEditingController();
-  List<String> skillSetList = ['hello', 'bravo', 'alpha'];
+  List<String> skillSetList = [];
+
+  updateData() {
+    UserService userService = context.read<UserService>();
+    userService.thisUser.skillSet = skillSetList;
+  }
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
-    print('ing');
-    service.checkProcessDone();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // skillController.addListener(checkProcessDone);
+    UserService userService = context.read<UserService>();
+    userService.thisUser.skillSet = skillSetList;
   }
 
   deleteSkillSet(String thisText) {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
     service.deleteTextBox(skillSetList, thisText);
+    updateData();
   }
 
   @override
@@ -89,8 +90,8 @@ class _SkillSetPageState extends State<SkillSetPage> {
                                 SizedBox(width: 8),
                                 GestureDetector(
                                   onTap: () {
-                                    loginProcessService
-                                        .makeTextBox(skillSetList);
+                                    loginProcessService.makeTextBox(
+                                        skillSetList, updateData);
                                   },
                                   child: Icon(
                                     Icons.add,

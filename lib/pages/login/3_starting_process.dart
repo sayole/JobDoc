@@ -5,10 +5,10 @@ import 'package:job_doc/pages/login/widgets/login_styles.dart';
 import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
+import '../../services/auth_service.dart';
+
 class StartingProcess extends StatelessWidget {
   const StartingProcess({Key? key}) : super(key: key);
-
-  test() {}
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +44,12 @@ class StartingProcess extends StatelessWidget {
                 Spacer(),
                 GestureDetector(
                   onTap: () => {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => NamePage()),
-                    // ),
-                    // service.createUser(),
-                    //
-                    userService.userData,
-                    print(userService.currentUser()?.displayName),
+                    userService.thisUser.uid =
+                        context.read<AuthService>().currentUser()?.uid,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NamePage()),
+                    ),
                   },
                   child: Container(
                     decoration: BoxDecoration(color: Color(0xFF3936F1)),
