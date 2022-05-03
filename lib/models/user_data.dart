@@ -21,7 +21,7 @@ class UserData {
   String careerType;
 
   //스킬셋
-  String skillSet;
+  List<String> skillSet = [];
 
   //관심 회사
   List<String> wishingCompany = [];
@@ -35,10 +35,10 @@ class UserData {
   // print("${stringList.split(',')}"); //Prints ['one', 'two', 'three']
 
   //입사예정일
-  String wishingJoinDate;
+  List<String> wishingJoinDate = [];
 
   //원하는 컨설팅
-  String wishingConsulting;
+  List<String> wishingConsulting = [];
 
   //공고
   String jobPosting;
@@ -53,9 +53,22 @@ class UserData {
     this.careerYears = '',
     this.careerPart = '',
     this.careerType = '',
-    this.skillSet = '',
-    this.wishingJoinDate = '',
-    this.wishingConsulting = '',
     this.jobPosting = '',
   });
+
+  Map<String, dynamic> toJson() => {
+        'uid': uid,
+        'name': name,
+        'educationGroup': educationGroup,
+        'educationSchoolName': educationSchoolName,
+        'educationStatus': educationStatus,
+        'careerCompany': careerCompany,
+        'careerYears': careerYears,
+        'careerPart': careerPart,
+        'careerType': careerType,
+        'skillSet': skillSet,
+        'wishingCompany': wishingCompany,
+        'wishingJoinDate': wishingJoinDate,
+        'wishingConsulting': wishingConsulting,
+      };
 }

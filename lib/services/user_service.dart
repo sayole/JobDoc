@@ -1,18 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/models/user_data.dart';
 
 class UserService extends ChangeNotifier {
   final userCollection = FirebaseFirestore.instance.collection('user');
   List<Map<String, dynamic>> userData = [];
 
-  Future<QuerySnapshot> readUser(int? contentId) async {
-    return userCollection.where('contentId', isEqualTo: contentId).get();
+  User? currentUser() {
+    // 현재 유저(로그인 되지 않은 경우 null 반환)
+    return FirebaseAuth.instance.currentUser;
   }
 
-  void createUser(String name, String uid, double star) async {
-    await userCollection.add({
-      'uid': uid,
-    });
+  Future<QuerySnapshot> getUser() async {
+    return userCollection.where('uid', isEqualTo: 'a').get();
+  }
+
+  void createUser() async {
+    // UserData _user = UserData();
+    // _user.uid = 'a';
+    // _user.name = 'a';
+    // _user.educationGroup = 'a';
+    // _user.educationSchoolName = 'a';
+    // _user.educationStatus = 'a';
+    // _user.careerCompany = 'a';
+    // _user.careerYears = 'a';
+    // _user.careerPart = 'a';
+    // _user.careerType = 'a';
+    // _user.skillSet = ['a', 'b', 'c'];
+    // _user.wishingCompany = ['a', 'b', 'c'];
+    // _user.wishingJoinDate = ['a', 'b', 'c'];
+    // _user.wishingConsulting = ['a', 'b', 'c'];
+
+    // await userCollection.add(_user.toJson());
+    print('yeah');
     notifyListeners();
   }
 
