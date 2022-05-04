@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LoginProcessSerivce extends ChangeNotifier {
+class EditProcessService extends ChangeNotifier {
   List<dynamic> controllers = [];
   bool isDone = false;
+
+  void notifyFunction() {
+    notifyListeners();
+  }
 
   void addControllers(List<dynamic> localControllers) {
     controllers.clear();
@@ -34,14 +38,12 @@ class LoginProcessSerivce extends ChangeNotifier {
   }
 
   makeTextBox(List<String> skillsetList, Function updateData,
-      TextEditingController myController) {
-    if (controllers[0].text == '') {
+      TextEditingController controller) {
+    if (controller.text == '') {
       return;
     }
-    skillsetList.add(controllers[0].text);
-    controllers[0].text = '';
-    updateData();
-    isDone = true;
+    skillsetList.add(controller.text);
+    controller.text = '';
     notifyListeners();
   }
 

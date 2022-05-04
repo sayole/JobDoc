@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/2_sign_in.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/pages/login/7_skill_set_page.dart';
+import 'package:job_doc/pages/login/8_wishing_company_page.dart';
+import 'package:job_doc/pages/myPage/edit_my_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
+import 'package:job_doc/services/edit_process_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
 import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
@@ -71,7 +75,8 @@ void main() async {
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => LoginProcessSerivce()),
         ChangeNotifierProvider(create: (context) => BtmNavProvider()),
-        ChangeNotifierProvider(create: (context) => UserService())
+        ChangeNotifierProvider(create: (context) => UserService()),
+        ChangeNotifierProvider(create: (context) => EditProcessService())
       ],
       child: const MyApp(),
     ),

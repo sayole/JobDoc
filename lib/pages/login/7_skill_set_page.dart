@@ -15,6 +15,77 @@ class SkillSetPage extends StatefulWidget {
   State<SkillSetPage> createState() => _SkillSetPageState();
 }
 
+Widget skillsetWidget(
+    Function myUpdateData,
+    Function myDeleteSkillSet,
+    List<String> myList,
+    TextEditingController myController,
+    dynamic myService) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      IntrinsicWidth(
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Color(0xffdfdfdf)),
+              borderRadius: BorderRadius.circular(10)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: 50),
+                  child: IntrinsicWidth(
+                    child: TextField(
+                      controller: myController,
+                      style: LoginStyles.inputStyle,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: SubmitWidgets.hintValueList['스킬셋'],
+                        hintStyle: TextStyle(
+                          color: Color(0xff3d3d3d),
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: -0.6,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8),
+                GestureDetector(
+                  onTap: () {
+                    myService.makeTextBox(myList, myUpdateData, myController);
+                  },
+                  child: Icon(
+                    Icons.add,
+                    color: Color(0xff3d3d3d),
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Wrap(
+          alignment: WrapAlignment.start,
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            ...myList
+                .map((e) => SubmitWidgets.textBox(true, e, myDeleteSkillSet)),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 class _SkillSetPageState extends State<SkillSetPage> {
   TextEditingController skillController = TextEditingController();
   List<String> skillSetList = [];
@@ -51,73 +122,8 @@ class _SkillSetPageState extends State<SkillSetPage> {
                   ...SubmitWidgets.infoText('가장 자신있는 스킬셋을 입력해주세요',
                       '가장 자신있는 스킬셋을 자유롭게 입력해주세요. 자세하게 써주실수록 관련있는 컨설턴트와 매칭될 확률이 높아져요.'),
                   // SubmitWidgets.skillSetWidget(skillSetList, skillController),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      IntrinsicWidth(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: Color(0xffdfdfdf)),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(minWidth: 50),
-                                  child: IntrinsicWidth(
-                                    child: TextField(
-                                      controller: skillController,
-                                      style: LoginStyles.inputStyle,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText:
-                                            SubmitWidgets.hintValueList['스킬셋'],
-                                        hintStyle: TextStyle(
-                                          color: Color(0xff3d3d3d),
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: -0.6,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                GestureDetector(
-                                  onTap: () {
-                                    loginProcessService.makeTextBox(
-                                        skillSetList, updateData);
-                                  },
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Color(0xff3d3d3d),
-                                    size: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: [
-                        ...skillSetList.map((e) =>
-                            SubmitWidgets.textBox(true, e, deleteSkillSet))
-                      ],
-                    ),
-                  ),
+                  skillsetWidget(updateData, deleteSkillSet, skillSetList,
+                      skillController, loginProcessService),
                 ])),
         nextPage: WishingCompanyPage(),
         index: 3,

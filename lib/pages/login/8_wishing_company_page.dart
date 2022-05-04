@@ -18,6 +18,28 @@ class WishingCompanyPage extends StatefulWidget {
 class _WishingCompanyPageState extends State<WishingCompanyPage> {
   List<String> companys = [];
   // List<String> internalCompanys1 = ['삼성', '현대', '네이버', '엘지', '카카오', '쿠팡', '토스'];
+  List<Map<String, dynamic>> companyList = [
+    {'name': '삼성', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '현대', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '네이버', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '엘지', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '카카오', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '쿠팡', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '토스', 'selected': false, 'group': 'internalCompany1'},
+    {'name': '야놀자', 'selected': false, 'group': 'internalCompany2'},
+    {'name': '당근마켓', 'selected': false, 'group': 'internalCompany2'},
+    {'name': '배달의 민족', 'selected': false, 'group': 'internalCompany2'},
+    {'name': '오늘의 집', 'selected': false, 'group': 'internalCompany2'},
+    {'name': '라인', 'selected': false, 'group': 'internalCompany2'},
+    {'name': '무신사', 'selected': false, 'group': 'internalCompany2'},
+    {'name': 'Apple', 'selected': false, 'group': 'foreignCompanys'},
+    {'name': 'Google', 'selected': false, 'group': 'foreignCompanys'},
+    {'name': 'Tesla', 'selected': false, 'group': 'foreignCompanys'},
+    {'name': 'Meta', 'selected': false, 'group': 'unicornCompanys'},
+    {'name': 'Zoom', 'selected': false, 'group': 'unicornCompanys'},
+    {'name': 'IONIQ', 'selected': false, 'group': 'unicornCompanys'}
+  ];
+
   List<Map<String, dynamic>> internalCompanys1 = [
     {'name': '삼성', 'selected': false},
     {'name': '현대', 'selected': false},
@@ -121,8 +143,13 @@ class _WishingCompanyPageState extends State<WishingCompanyPage> {
                         alignment: WrapAlignment.start, // 정렬 방식
                         spacing: 10, // 상하(좌우) 공간
                         children: [
-                          ...internalCompanys1.asMap().entries.map((e) =>
-                              SubmitWidgets.textBox(
+                          ...companyList
+                              .where((element) =>
+                                  element['group'] == 'internalCompany1')
+                              .toList()
+                              .asMap()
+                              .entries
+                              .map((e) => SubmitWidgets.textBox(
                                   e.value['selected'],
                                   e.value['name'] ?? '',
                                   (a) => selectCompanySwitch(

@@ -13,20 +13,33 @@ class UserService extends ChangeNotifier {
     return FirebaseAuth.instance.currentUser;
   }
 
-  void getUserData() async {
+  Future<QuerySnapshot> getUserData() async {
     QuerySnapshot snapshot =
         await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
-    print('-------------------------------------------------');
     print(snapshot.docs[0].data());
+    Object? user = snapshot.docs[0].data();
+    thisUser = UserData.fromJson(snapshot.docs[0].data() as Map);
+    print('2222222222222222222${thisUser.name}');
+    // thisUser = UserData.fromJson(snapshot.docs[0].data());
+    return snapshot;
+
+    // return await userCollection
+    //     .where('uid', isEqualTo: currentUser()?.uid)
+    //     .get();
   }
 
   Future<bool> checkHaveUserData() async {
-    QuerySnapshot snapshot =
+    final snapshot =
         await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
-    print('aksdfj;lskdfj;aldfja;ldkfjad');
+
+    // DocumentReference docRef= userCollection.document(doc_id).collection("Dates").document();
     if (snapshot.docs.isEmpty) {
       return false;
     } else {
+      userCollection
+          .doc(currentUser()?.uid)
+          .get()
+          .then((value) => print('111111111111111111{$value.documentId}'));
       return true;
     }
   }

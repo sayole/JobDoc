@@ -2,7 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/models/user_data.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/pages/main_home/main_home.dart';
+import 'package:job_doc/pages/myPage/edit_my_page.dart';
 import 'package:job_doc/pages/myPage/my_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/user_service.dart';
@@ -59,7 +62,8 @@ class _SignInState extends State<SignIn> {
   void toMainPage() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MyPage()),
+      // MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => EditMyPage()),
     );
   }
 

@@ -1,47 +1,39 @@
 class UserData {
   //firebase authentication 상의 UID
-  String? uid;
+  late String? uid;
   //성함
-  String name;
+  late String name;
 
   //학력
-  String educationGroup;
+  late String educationGroup;
   //학교명
-  String educationSchoolName;
+  late String educationSchoolName;
   //학력 상태
-  String educationStatus;
+  late String educationStatus;
 
   //회사
-  String careerCompany;
+  late String careerCompany;
   //연차
-  String careerYears;
+  late String careerYears;
   //직무
-  String careerPart;
+  late String careerPart;
   //고용형태
-  String careerType;
+  late String careerType;
 
   //스킬셋
-  List<String> skillSet = [];
+  late List<String> skillSet = [];
 
   //관심 회사
-  List<String> wishingCompany = [];
-  //DB 넣을 시
-  // var list = ['one', 'two', 'three'];
-  // var stringList = list.join(",");
-  // print(stringList); //Prints "one,two,three"
-
-  //DB 뺄 때
-  // String stringList = "one,two,three";
-  // print("${stringList.split(',')}"); //Prints ['one', 'two', 'three']
+  late List<String> wishingCompany = [];
 
   //입사예정일
-  List<String> wishingJoinDate = [];
+  late List<String> wishingJoinDate = [];
 
   //원하는 컨설팅
-  List<String> wishingConsulting = [];
+  late List<String> wishingConsulting = [];
 
   //공고
-  String jobPosting;
+  late String jobPosting;
 
   UserData({
     this.uid = '',
@@ -71,4 +63,20 @@ class UserData {
         'wishingJoinDate': wishingJoinDate,
         'wishingConsulting': wishingConsulting,
       };
+
+  UserData.fromJson(Map parsedJson) {
+    uid = parsedJson['uid'] ?? '';
+    name = parsedJson['name'] ?? '';
+    educationGroup = parsedJson['educationGroup'] ?? '';
+    educationSchoolName = parsedJson['educationSchoolName'] ?? '';
+    educationStatus = parsedJson['educationStatus'] ?? '';
+    careerCompany = parsedJson['careerCompany'] ?? '';
+    careerYears = parsedJson['careerYears'] ?? '';
+    careerPart = parsedJson['careerPart'] ?? '';
+    careerType = parsedJson['careerType'] ?? '';
+    skillSet = parsedJson['skillSet'] ?? [];
+    wishingCompany = parsedJson['wishingCompany'] ?? [];
+    wishingJoinDate = parsedJson['wishingJoinDate'] ?? [];
+    wishingConsulting = parsedJson['wishingConsulting'] ?? [];
+  }
 }
