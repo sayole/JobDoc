@@ -84,7 +84,6 @@ class SubmitWidgets {
 
   static Widget submitDropDownField(
       String widgetName, TextEditingController editingController) {
-    print(dropDownValueList[widgetName]?.length);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,8 +143,6 @@ class SubmitWidgets {
               SizedBox(width: 8),
               GestureDetector(
                 onTap: () {
-                  //삭제
-                  // inputColor == 'blue'?
                   deleteTextBox(inputText);
                 },
                 child: selected == true

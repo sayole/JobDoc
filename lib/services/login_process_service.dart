@@ -34,12 +34,12 @@ class LoginProcessSerivce extends ChangeNotifier {
   }
 
   makeTextBox(List<String> skillsetList, Function updateData,
-      TextEditingController myController) {
-    if (controllers[0].text == '') {
+      TextEditingController skillController) {
+    if (skillController.text == '') {
       return;
     }
-    skillsetList.add(controllers[0].text);
-    controllers[0].text = '';
+    skillsetList.add(skillController.text);
+    skillController.text = '';
     updateData();
     isDone = true;
     notifyListeners();

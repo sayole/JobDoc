@@ -133,7 +133,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: SignIn(),
+      home: EditMyPage(),
     );
   }
 }

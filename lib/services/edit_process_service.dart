@@ -16,12 +16,6 @@ class EditProcessService extends ChangeNotifier {
     }
   }
 
-  deletePost(List<String> postList, String thisText) {
-    print('hello');
-    print(postList);
-    // postList.remove(thisText);
-  }
-
   updateTextBox(List<String> valueList) {
     if (valueList.length == 0) {
       isDone = false;
@@ -33,17 +27,19 @@ class EditProcessService extends ChangeNotifier {
 
   deleteTextBox(List<String> valueList, String thisText) {
     valueList.remove(thisText);
-    if (valueList.length == 0) isDone = false;
+    isDone = true;
+    print('delete');
     notifyListeners();
   }
 
-  makeTextBox(List<String> skillsetList, Function updateData,
-      TextEditingController controller) {
+  makeTextBox(List<String> skillsetList, TextEditingController controller) {
     if (controller.text == '') {
       return;
     }
+    isDone = true;
     skillsetList.add(controller.text);
     controller.text = '';
+    print('make');
     notifyListeners();
   }
 

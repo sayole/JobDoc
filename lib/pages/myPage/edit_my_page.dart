@@ -40,20 +40,19 @@ class _EditMyPageState extends State<EditMyPage> {
 
   updateSkillSet() {
     EditProcessService service = context.read<EditProcessService>();
-
-    skillSetList.add(skillController.text);
-// service.
+    service.makeTextBox(skillSetList, skillController);
   }
 
   deleteSkillSet(String thisText) {
-    LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    EditProcessService service = context.read<EditProcessService>();
     service.deleteTextBox(skillSetList, thisText);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserService>(builder: (context, userService, child) {
-      EditProcessService service = context.read<EditProcessService>();
+    return Consumer<EditProcessService>(
+        builder: (context, editProcessService, child) {
+      UserService userService = context.read<UserService>();
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -80,11 +79,6 @@ class _EditMyPageState extends State<EditMyPage> {
         body: FutureBuilder<QuerySnapshot>(
             future: userService.getUserData(),
             builder: (context, snapshot) {
-              // print(' 11111111111111 {$snapshot}');
-              final documents = snapshot.data?.docs ?? [];
-              print(documents);
-              // print(documents[0].get('name'));
-              print(userService.thisUser.name);
               return SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -114,6 +108,7 @@ class _EditMyPageState extends State<EditMyPage> {
                         SubmitWidgets.submitTextField('직무', partController),
                         SubmitWidgets.submitDropDownField(
                             '고용형태', typeController),
+                        ////////////////////////////////////////////////////
                         ////////////////////////////////////////////////////
                         titleText('가장 자신있는 스킬셋'),
                         Column(
@@ -156,7 +151,8 @@ class _EditMyPageState extends State<EditMyPage> {
                                       SizedBox(width: 8),
                                       GestureDetector(
                                         onTap: () {
-                                          // myService.makeTextBox(myList, myUpdateData, myController);
+                                          editProcessService.makeTextBox(
+                                              skillSetList, skillController);
                                         },
                                         child: Icon(
                                           Icons.add,
@@ -176,13 +172,16 @@ class _EditMyPageState extends State<EditMyPage> {
                                 spacing: 10,
                                 runSpacing: 10,
                                 children: [
-                                  // ...myList
-                                  //     .map((e) => SubmitWidgets.textBox(true, e, myDeleteSkillSet)),
+                                  ...skillSetList.map((e) =>
+                                      SubmitWidgets.textBox(
+                                          true, e, deleteSkillSet)),
                                 ],
                               ),
                             ),
                           ],
                         ),
+                        ////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////
                       ],
                     ),
                   ),
