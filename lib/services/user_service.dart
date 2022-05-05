@@ -14,18 +14,21 @@ class UserService extends ChangeNotifier {
   }
 
   Future<QuerySnapshot> getUserData() async {
-    QuerySnapshot snapshot =
-        await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
-    print(snapshot.docs[0].data());
-    Object? user = snapshot.docs[0].data();
-    thisUser = UserData.fromJson(snapshot.docs[0].data() as Map);
-    print('2222222222222222222${thisUser.name}');
-    // thisUser = UserData.fromJson(snapshot.docs[0].data());
-    return snapshot;
+    // QuerySnapshot snapshot =
+    //     await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
+    // print(snapshot.docs[0].data());
+    // Object? user = snapshot.docs[0].data();
+    // thisUser = UserData.fromJson(snapshot.docs[0].data() as Map);
+    // print('2222222222222222222${thisUser.name}');
+    // // thisUser = UserData.fromJson(snapshot.docs[0].data());
+    // return snapshot;
 
     // return await userCollection
     //     .where('uid', isEqualTo: currentUser()?.uid)
     //     .get();
+    return await userCollection
+        .where('uid', isEqualTo: currentUser()?.uid)
+        .get();
   }
 
   Future<bool> checkHaveUserData() async {

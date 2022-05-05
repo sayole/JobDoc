@@ -25,14 +25,14 @@ class EditProcessService extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteTextBox(List<String> valueList, String thisText) {
+  deleteTextBox(List<dynamic> valueList, String thisText) {
     valueList.remove(thisText);
     isDone = true;
     print('delete');
     notifyListeners();
   }
 
-  makeTextBox(List<String> skillsetList, TextEditingController controller) {
+  makeTextBox(List<dynamic> skillsetList, TextEditingController controller) {
     if (controller.text == '') {
       return;
     }
@@ -40,6 +40,7 @@ class EditProcessService extends ChangeNotifier {
     skillsetList.add(controller.text);
     controller.text = '';
     print('make');
+    print(skillsetList);
     notifyListeners();
   }
 

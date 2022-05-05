@@ -52,8 +52,9 @@ class SubmitWidgets {
     ];
   }
 
-  static Widget submitTextField(
-      String widgetName, TextEditingController editingController) {
+  static Widget submitTextField(String widgetName,
+      TextEditingController editingController, String selectedText) {
+    editingController.text = selectedText;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,8 +83,8 @@ class SubmitWidgets {
     );
   }
 
-  static Widget submitDropDownField(
-      String widgetName, TextEditingController editingController) {
+  static Widget submitDropDownField(String widgetName,
+      TextEditingController editingController, String selectedText) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,6 +107,7 @@ class SubmitWidgets {
           onChanged: (value) {
             editingController.text = value.toString();
           },
+          selectedItem: selectedText == 'none' ? '' : selectedText,
         ),
         SizedBox(
           height: 20,
@@ -164,53 +166,50 @@ class SubmitWidgets {
     );
   }
 
-  static Widget submitPostTextField(List<String> postList,
-      TextEditingController editingController, Function deletePost) {
-    Widget inputedPosts() {
-      return Row(children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.black,
-              width: 1,
-            ))),
-            child: Row(
+  static List<Widget> companyWidget(
+      String title,
+      List<Map<String, dynamic>> thisList1,
+      List<Map<String, dynamic>> thisList2,
+      Function switchFuntion) {
+    return [
+      Text(
+        title,
+        style: LoginStyles.textFieldSubtitle,
+      ),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Wrap(
+                alignment: WrapAlignment.start, // 정렬 방식
+                spacing: 10, // 상하(좌우) 공간
+                children: [
+                  ...thisList1.asMap().entries.map((e) => SubmitWidgets.textBox(
+                      e.value['selected'],
+                      e.value['name'] ?? '',
+                      (a) => switchFuntion(a, thisList1, e.key)))
+                ],
+              ),
+            ),
+            Wrap(
+              alignment: WrapAlignment.start,
+              spacing: 10,
               children: [
-                Expanded(
-                    child: Text(editingController.text,
-                        style: LoginStyles.inputStyle)),
-                GestureDetector(
-                    onTap: () => deletePost(), child: Icon(Icons.clear)),
+                ...thisList2.asMap().entries.map((e) => SubmitWidgets.textBox(
+                    e.value['selected'],
+                    e.value['name'] ?? '',
+                    (a) => switchFuntion(a, thisList2, e.key)))
               ],
             ),
-          ),
+          ],
         ),
-      ]);
-    }
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        inputedPosts(),
-        TextField(
-            controller: editingController,
-            style: LoginStyles.inputStyle,
-            decoration: InputDecoration(
-              hintText: hintValueList['링크'],
-              hintStyle: LoginStyles.hintStyle,
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              suffixIcon: GestureDetector(child: Icon(Icons.add)),
-            )),
-        SizedBox(
-          height: 20,
-        )
-      ],
-    );
+      ),
+      SizedBox(
+        height: 20,
+      ),
+    ];
   }
 }

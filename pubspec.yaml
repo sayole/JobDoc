@@ -99,6 +99,7 @@ flutter:
     - assets/icons/setting_not_chosen.png
     - assets/images/done_image.png
     - assets/images/logo.png
+    - assets/images/blue_logo.png
     - assets/images/sign_in_image.png
     - assets/icons/google_logo.png
     - assets/icons/facebook_logo.png

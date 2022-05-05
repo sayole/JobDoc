@@ -120,6 +120,7 @@ class _MainPageState extends State<MainPage> {
                       return CircularProgressIndicator();
                     } else {
                       snapshot.data!.docs.forEach((value) {
+                        card_list.clear();
                         card_list = [...card_list, value.data()!];
                       });
                       return Container(

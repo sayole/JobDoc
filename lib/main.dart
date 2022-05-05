@@ -7,6 +7,8 @@ import 'package:job_doc/pages/login/2_sign_in.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
 import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/pages/login/8_wishing_company_page.dart';
+import 'package:job_doc/pages/main_home/main_home.dart';
+import 'package:job_doc/pages/main_home/main_home_type1.dart';
 import 'package:job_doc/pages/myPage/edit_my_page.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
