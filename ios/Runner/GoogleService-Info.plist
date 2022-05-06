@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>360351537897-rk3p7cs98sk8pu5lds0n9cgrjpm71j3f.apps.googleusercontent.com</string>
+	<string>360351537897-1h4i2bnrcnf7rovuvbn7q1m2jvfi7e4q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.360351537897-rk3p7cs98sk8pu5lds0n9cgrjpm71j3f</string>
+	<string>com.googleusercontent.apps.360351537897-1h4i2bnrcnf7rovuvbn7q1m2jvfi7e4q</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>360351537897-1fki1c8afg8vuidgikikrg8aj3d81ue0.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCq9eR_Z_0gCA4tifpwa8xWkeb-8Yb_-zU</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,27 +15,27 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.SangyoonLee.job_doc</string>
+	<string>com.SangyoonLee.jobdoc</string>
 	<key>PROJECT_ID</key>
 	<string>jobdoc-8fbca</string>
 	<key>STORAGE_BUCKET</key>
 	<string>jobdoc-8fbca.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:360351537897:ios:ec409b4b8adb2b42502e78</string>
+	<string>1:360351537897:ios:0782e9b4b19581be502e78</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
-	</dict>
+	</dict>	
 </dict>
 </plist>
