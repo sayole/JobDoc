@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:job_doc/models/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
 import 'package:provider/provider.dart';
-import 'main_home_type2.dart';
 import 'main_home_type3.dart';
 import 'main_home_type4.dart';
 
@@ -56,12 +54,15 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("내 이력서 수정하기",
-                          style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: Color(0xFFF3936F1))),
+                      GestureDetector(
+                        onTap: () => btmNav.changeIndex(2),
+                        child: Text("내 이력서 수정하기",
+                            style: TextStyle(
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                color: Color(0xFFF3936F1))),
+                      ),
                       Image(
                           image: AssetImage('assets/icons/right_arrow.png'),
                           width: 16,
@@ -118,27 +119,36 @@ class _MainPageState extends State<MainPage> {
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
                       return CircularProgressIndicator();
-                    } else {
+                    } else if (snapshot.hasData) {
                       snapshot.data!.docs.forEach((value) {
                         card_list = [...card_list, value.data()!];
                       });
-                      return Container(
-                        height: 327,
-                        child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) =>
-                                card_list[index] != 'undefined'
-                                    ? proposal_main_card(
-                                        card_list[index]["title"],
-                                        card_list[index]["tag"],
-                                        card_list[index]["text"],
-                                        card_list[index]["amount"],
-                                        card_colors[index % 10],
-                                      )
-                                    : SizedBox(height: 2),
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: card_list.length),
-                      );
+                      if (card_list.isEmpty) {
+                        return Container(
+                            height: 300,
+                            width: 100,
+                            decoration: BoxDecoration(color: Colors.red));
+                      } else {
+                        return Container(
+                          height: 327,
+                          child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) =>
+                                  card_list[index] != 'undefined'
+                                      ? proposal_main_card(
+                                          card_list[index]["title"],
+                                          card_list[index]["tag"],
+                                          card_list[index]["text"],
+                                          card_list[index]["amount"],
+                                          card_colors[index % 10],
+                                        )
+                                      : SizedBox(height: 2),
+                              separatorBuilder: (context, index) => Divider(),
+                              itemCount: card_list.length),
+                        );
+                      }
+                    } else {
+                      return Text('오류입니다');
                     }
                   },
                 ),

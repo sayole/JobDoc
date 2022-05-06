@@ -75,34 +75,8 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/icons/add.png
-    - assets/icons/backward.png
-    - assets/icons/bell.png
-    - assets/icons/bottom_arrow.png
-    - assets/icons/check_chosen.png
-    - assets/icons/check_circle.png
-    - assets/icons/check_not_chosen.png
-    - assets/icons/close.png
-    - assets/icons/home_chosen.png
-    - assets/icons/home_not_chosen.png
-    - assets/icons/left_arrow.png
-    - assets/icons/my_page_chosen.png
-    - assets/icons/my_page_not_chosen.png
-    - assets/icons/proposal_chosen.png
-    - assets/icons/proposal_not_chosen.png
-    - assets/icons/right_arrow.png
-    - assets/icons/search.png
-    - assets/icons/setting_chosen.png
-    - assets/icons/setting_not_chosen.png
-    - assets/images/done_image.png
-    - assets/images/logo.png
-    - assets/images/sign_in_image.png
-    - assets/icons/google_logo.png
-    - assets/icons/facebook_logo.png
-    - assets/icons/apple_logo.png
-    - assets/images/person1.png
-    - assets/images/person2.png
-    - assets/images/person3.png
+    - assets/icons/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

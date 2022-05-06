@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../services/bottomnavi_service.dart';
 import '../myPage/my_page.dart';
+import '../proposal/proposal_list.dart';
 import 'main_home_type1.dart';
 import 'settings_withdraw.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +23,7 @@ class _SettingPageState extends State<SettingPage> {
   bool _toggled = true;
   @override
   Widget build(BuildContext context) {
+    final btmNav = Provider.of<BtmNavProvider>(context, listen: true);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -65,9 +69,7 @@ class _SettingPageState extends State<SettingPage> {
                   width: 20,
                   height: 20,
                 ),
-                onTap: () {
-                  print("감사합니다 수정하시오");
-                },
+                onTap: () => btmNav.changeIndex(2),
               ),
               SizedBox(height: 40),
               Text(
