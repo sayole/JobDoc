@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/10_wishing_consulting_page.dart';
 import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
 import 'package:job_doc/services/login_process_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import 'login_process_scaffold.dart';
@@ -22,6 +23,8 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
   ];
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingJoinDate = joinList;
     service.checkProcessDone();
   }
 
@@ -40,6 +43,8 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
       joinList.remove(valueList[index]['name']);
       service.deleteTextBox(joinList, valueList[index]['name']);
     }
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingJoinDate = joinList;
   }
 
   @override

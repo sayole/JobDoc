@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/login/12_done_loading.dart';
+import 'package:job_doc/pages/login/2_sign_in.dart';
 import 'package:job_doc/pages/login/5_education_page.dart';
 import 'package:job_doc/pages/login/login_process_scaffold.dart';
 import 'package:job_doc/pages/login/widgets/login_styles.dart';
 import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/login_process_service.dart';
@@ -19,6 +22,8 @@ class _NamePageState extends State<NamePage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.name = nameController.text;
     service.checkProcessDone();
   }
 
@@ -42,7 +47,7 @@ class _NamePageState extends State<NamePage> {
             children: [
               ...SubmitWidgets.infoText('이름을 입력해 주세요',
                   '이름은 오직 컨설턴트와 이야기할 때 본인인지 확인하는 용도로 만 사용돼요. 주민등록상 본명을 입력해주세요'),
-              SubmitWidgets.submitTextField("이름", nameController)
+              SubmitWidgets.submitTextField("이름", nameController, 'none')
             ],
           ),
         ),

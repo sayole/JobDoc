@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/11_job_posting_page.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/login_process_service.dart';
@@ -37,6 +38,8 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
       consultingList.remove(valueList[index]['name']);
       service.deleteTextBox(consultingList, valueList[index]['name']);
     }
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingConsulting = consultingList;
   }
 
   @override

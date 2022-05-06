@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../services/bottomnavi_service.dart';
@@ -137,10 +138,12 @@ class _SettingPageState extends State<SettingPage> {
                       fontFamily: 'Pretendard'),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => withDraw()),
-                  );
+                  AuthService service = context.read<AuthService>();
+                  service.signOut();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => withDraw()),
+                  // );
                 },
               ),
               //회원 탈퇴

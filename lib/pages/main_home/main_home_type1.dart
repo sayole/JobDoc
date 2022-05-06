@@ -120,6 +120,7 @@ class _MainPageState extends State<MainPage> {
                         ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     } else if (snapshot.hasData) {
+                      card_list.clear();
                       snapshot.data!.docs.forEach((value) {
                         card_list = [...card_list, value.data()!];
                       });
