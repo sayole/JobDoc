@@ -7,6 +7,7 @@
 // 페이스북 로그인 연동
 //https://www.youtube.com/watch?v=Ai3QWQ_1pJM
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -54,4 +55,10 @@ class AuthService extends ChangeNotifier {
     await FirebaseAuth.instance.signOut();
     notifyListeners(); // 로그인 상태 변경 알림
   }
+
+  // void deleteUser() async {
+  //    final userCollection = FirebaseFirestore.instance.collection('user');
+  //   userCollection.doc(currentUser()?.uid).get();
+  //   await FirebaseAuth.instance.currentUser?.delete();
+  // }
 }
