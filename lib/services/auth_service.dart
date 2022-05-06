@@ -56,9 +56,7 @@ class AuthService extends ChangeNotifier {
     notifyListeners(); // 로그인 상태 변경 알림
   }
 
-  // void deleteUser() async {
-  //    final userCollection = FirebaseFirestore.instance.collection('user');
-  //   userCollection.doc(currentUser()?.uid).get();
-  //   await FirebaseAuth.instance.currentUser?.delete();
-  // }
+  void deleteUser() async {
+    await currentUser()?.delete();
+  }
 }

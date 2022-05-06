@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:job_doc/models/user_data.dart';
 import 'package:job_doc/pages/myPage/edit_my_page.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import '../myPage/my_page.dart';
 import '../proposal/proposal_list.dart';
@@ -51,6 +53,8 @@ class _HomePageState extends State<HomePage>
     _navProvider = Provider.of<BtmNavProvider>(context, listen: true);
     return Consumer<BtmNavProvider>(
       builder: (context, btmNav, child) {
+        UserService userService = context.read<UserService>();
+
         final btmNavItems = [
           BottomNavigationBarItem(
               icon: Image(
@@ -84,15 +88,29 @@ class _HomePageState extends State<HomePage>
               label: '환경 설정'),
         ];
         return Scaffold(
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              MainPage(), // tpye1
-              ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
-              EditMyPage(), // 내정보 페이지
-              SettingPage(),
-            ],
-          ),
+          body: FutureBuilder<QuerySnapshot>(
+              future: userService.getUserData(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Something went wrong');
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else {
+                  final documents = snapshot.data?.docs ?? [];
+                  final userDocumentId = documents[0].id;
+                  userService.retrieveUserData(documents[0]);
+                  return TabBarView(
+                    controller: _tabController,
+                    children: [
+                      MainPage(), // tpye1
+                      ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
+                      EditMyPage(), // 내정보 페이지
+                      SettingPage(),
+                    ],
+                  );
+                }
+              }),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.white,
             type: BottomNavigationBarType.fixed,

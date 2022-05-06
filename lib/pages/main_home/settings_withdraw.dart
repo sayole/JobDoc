@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/main_home/main_home.dart';
+import 'package:job_doc/services/auth_service.dart';
+import 'package:job_doc/services/user_service.dart';
+import 'package:provider/provider.dart';
 import 'main_home_type1.dart';
 
 class withDraw extends StatelessWidget {
@@ -88,7 +91,12 @@ class withDraw extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      AuthService authService = context.read<AuthService>();
+                      UserService userService = context.read<UserService>();
+                      userService.delete();
+                      authService.deleteUser();
+                    },
                     child: Text(
                       '정말 탈퇴하기',
                       style: TextStyle(

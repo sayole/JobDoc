@@ -122,6 +122,18 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  // void checkHaveUserdata() async {
+  //   UserService service = context.read<UserService>();
+  //   await service.checkHaveUserData().then((value) {
+  //     if (value == true) {
+  //       print('ㄹㅇ');
+  //       toMainPage();
+  //     } else {
+  //       nextPage();
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -133,22 +145,28 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: BranchPage(),
+      home: SignIn(),
     );
   }
 }
 
-class BranchPage extends StatelessWidget {
-  const BranchPage({Key? key}) : super(key: key);
+class LoginBranchPage extends StatelessWidget {
+  const LoginBranchPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          return HomePage();
-        } else {
+        if (snapshot.hasError) {
           return OnBoarding();
+        } else if (FirebaseAuth.instance.currentUser == null) {
+          return OnBoarding();
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else {
+          print(FirebaseAuth.instance.currentUser);
+          FirebaseAuth.instance.currentUser?.delete();
+          return HomePage();
         }
       },
     );

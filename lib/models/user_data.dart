@@ -21,19 +21,16 @@ class UserData {
   late String careerType;
 
   //스킬셋
-  late List<String> skillSet = [];
+  late List<dynamic> skillSet = [];
 
   //관심 회사
-  late List<String> wishingCompany = [];
+  late List<dynamic> wishingCompany = [];
 
   //입사예정일
-  late List<String> wishingJoinDate = [];
+  late List<dynamic> wishingJoinDate = [];
 
   //원하는 컨설팅
-  late List<String> wishingConsulting = [];
-
-  //공고
-  late String jobPosting;
+  late List<dynamic> wishingConsulting = [];
 
   UserData({
     this.uid = '',
@@ -45,7 +42,6 @@ class UserData {
     this.careerYears = '',
     this.careerPart = '',
     this.careerType = '',
-    this.jobPosting = '',
   });
 
   Map<String, dynamic> toJson() => {
@@ -74,9 +70,9 @@ class UserData {
     careerYears = parsedJson['careerYears'] ?? '';
     careerPart = parsedJson['careerPart'] ?? '';
     careerType = parsedJson['careerType'] ?? '';
-    skillSet = parsedJson['skillSet'] ?? [];
-    wishingCompany = parsedJson['wishingCompany'] ?? [];
-    wishingJoinDate = parsedJson['wishingJoinDate'] ?? [];
-    wishingConsulting = parsedJson['wishingConsulting'] ?? [];
+    // skillSet = parsedJson['skillSet'] ?? [];
+    // wishingCompany = parsedJson['wishingCompany'] ?? [];
+    // wishingJoinDate = parsedJson['wishingJoinDate'] ?? [];
+    // wishingConsulting = parsedJson['wishingConsulting'] ?? [];
   }
 }

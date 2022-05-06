@@ -47,7 +47,8 @@ class _SignInState extends State<SignIn> {
     UserService service = context.read<UserService>();
     await service.checkHaveUserData().then((value) {
       if (value == true) {
-        nextPage();
+        print('ㄹㅇ');
+        toMainPage();
       } else {
         nextPage();
       }
@@ -57,7 +58,7 @@ class _SignInState extends State<SignIn> {
   void nextPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MainPage()),
+      MaterialPageRoute(builder: (context) => StartingProcess()),
     );
   }
 

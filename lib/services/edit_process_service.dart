@@ -26,10 +26,8 @@ class EditProcessService extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteTextBox(
-      dynamic id, List<dynamic> valueList, String name, String thisText) async {
+  deleteTextBox(List<dynamic> valueList, String name, String thisText) async {
     valueList.remove(thisText);
-    await userCollection.doc(id).update({name: valueList});
     notifyListeners();
   }
 

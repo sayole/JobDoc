@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,25 +9,24 @@ class UserService extends ChangeNotifier {
   final userCollection = FirebaseFirestore.instance.collection('user');
   List<Map<String, dynamic>> userData = [];
   UserData thisUser = UserData();
+  String userId = '';
 
   User? currentUser() {
     // 현재 유저(로그인 되지 않은 경우 null 반환)
     return FirebaseAuth.instance.currentUser;
   }
 
-  Future<QuerySnapshot> getUserData() async {
-    // QuerySnapshot snapshot =
-    //     await userCollection.where('uid', isEqualTo: currentUser()?.uid).get();
-    // print(snapshot.docs[0].data());
-    // Object? user = snapshot.docs[0].data();
-    // thisUser = UserData.fromJson(snapshot.docs[0].data() as Map);
-    // print('2222222222222222222${thisUser.name}');
-    // // thisUser = UserData.fromJson(snapshot.docs[0].data());
-    // return snapshot;
+  retrieveUserData(dynamic doc) async {
+    UserData tmpUser = UserData.fromJson(jsonDecode(jsonEncode(doc.data())));
+    tmpUser.skillSet = doc.get('skillSet');
+    tmpUser.wishingCompany = doc.get('wishingCompany');
+    tmpUser.wishingJoinDate = doc.get('wishingJoinDate');
+    tmpUser.wishingConsulting = doc.get('wishingConsulting');
+    thisUser = tmpUser;
+    userId = doc.id;
+  }
 
-    // return await userCollection
-    //     .where('uid', isEqualTo: currentUser()?.uid)
-    //     .get();
+  Future<QuerySnapshot> getUserData() async {
     return await userCollection
         .where('uid', isEqualTo: currentUser()?.uid)
         .get();
@@ -53,16 +54,13 @@ class UserService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void update(String docId, String review, double star) async {
-    await userCollection.doc(docId).update({
-      'review': review,
-      'star': star,
-    });
+  void updateUser() async {
+    await userCollection.doc(userId).update(thisUser.toJson());
     notifyListeners();
   }
 
-  void delete(String docId) async {
-    await userCollection.doc(docId).delete();
+  void delete() async {
+    await userCollection.doc(userId).delete();
     notifyListeners();
   }
 }

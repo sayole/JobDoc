@@ -50,12 +50,10 @@ class _EducationPageState extends State<EducationPage> {
               children: [
                 ...SubmitWidgets.infoText(
                     '최종 학력을 입력해주세요', '작성하는 지금 이 순간 현재 학력이 무엇인지 입력해주세요.'),
+                SubmitWidgets.submitDropDownField('학력', groupcontroller, ''),
+                SubmitWidgets.submitTextField("학교명", schoolNameController, ''),
                 SubmitWidgets.submitDropDownField(
-                    '학력', groupcontroller, 'none'),
-                SubmitWidgets.submitTextField(
-                    "학교명", schoolNameController, 'none'),
-                SubmitWidgets.submitDropDownField(
-                    "재학 상태", statusController, 'none'),
+                    "재학 상태", statusController, ''),
               ],
             ),
           ),

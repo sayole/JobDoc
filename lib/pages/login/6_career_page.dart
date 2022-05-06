@@ -54,13 +54,10 @@ class _CareerPageState extends State<CareerPage> {
                 children: [
                   ...SubmitWidgets.infoText(
                       '지금은 어떤 일을 하고 계시나요?', '현재 어떤 회사에서 어떤 일을 하고 계신지 알려주세요.'),
-                  SubmitWidgets.submitTextField(
-                      '회사', companyController, 'none'),
-                  SubmitWidgets.submitDropDownField(
-                      '년차', yearsController, 'none'),
-                  SubmitWidgets.submitTextField('직무', partController, 'none'),
-                  SubmitWidgets.submitDropDownField(
-                      '고용형태', typeController, 'none'),
+                  SubmitWidgets.submitTextField('회사', companyController, ''),
+                  SubmitWidgets.submitDropDownField('년차', yearsController, ''),
+                  SubmitWidgets.submitTextField('직무', partController, ''),
+                  SubmitWidgets.submitDropDownField('고용형태', typeController, ''),
                 ])),
         nextPage: SkillSetPage(),
         index: 2,

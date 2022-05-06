@@ -140,10 +140,6 @@ class _SettingPageState extends State<SettingPage> {
                 onTap: () {
                   AuthService service = context.read<AuthService>();
                   service.signOut();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => withDraw()),
-                  // );
                 },
               ),
               //회원 탈퇴
