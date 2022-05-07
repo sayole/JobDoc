@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../main_consultant/consultant_1.dart';
+import '../main_consultant/consultant_2.dart';
+import '../main_consultant/consultatn_3.dart';
+
 class Type3 extends StatelessWidget {
   const Type3({Key? key}) : super(key: key);
 
@@ -20,7 +24,10 @@ class Type3 extends StatelessWidget {
         SizedBox(height: 12),
         GestureDetector(
           onTap: () {
-            print('해당 첫번째 분으로 이동 견적으로 이동');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ConsultantDetail_1()),
+            );
           },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -28,7 +35,7 @@ class Type3 extends StatelessWidget {
             child: Row(
               children: [
                 Image(
-                    image: AssetImage('assets/images/sign_in_image.png'),
+                    image: AssetImage('assets/images/person3.png'),
                     width: 64,
                     height: 83),
                 SizedBox(width: 16),
@@ -41,7 +48,7 @@ class Type3 extends StatelessWidget {
                         Container(
                           height: 24,
                           child: Text(
-                            '컨설턴트1',
+                            'LJH',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Pretendard',
@@ -61,7 +68,7 @@ class Type3 extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      "#해시태그1  #해시태그2  #해시태그3",
+                      "#인사담당자98%만족도 #자소서코칭 #면접코칭 #이직컨설팅",
                       style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: Color(0xFFF3936F1),
@@ -71,7 +78,7 @@ class Type3 extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      "컨설턴트 설명을 2줄이상 컨설턴트 설명을 2줄이상\n컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상",
+                      "꿈을 현실로 만들어 드리는 커리어 코치입니다.\n내면의 잠재력을 찾아 원하는 목표를 달성할 수 있도록 함께 합니다.",
                       style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: Colors.black,
@@ -86,7 +93,10 @@ class Type3 extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            print('해당 두번째 푼으로 이동 견적으로 이동');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ConsultantDetail_2()),
+            );
           },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -94,7 +104,7 @@ class Type3 extends StatelessWidget {
             child: Row(
               children: [
                 Image(
-                    image: AssetImage('assets/images/sign_in_image.png'),
+                    image: AssetImage('assets/images/person2.png'),
                     width: 64,
                     height: 83),
                 SizedBox(width: 16),
@@ -107,7 +117,7 @@ class Type3 extends StatelessWidget {
                         Container(
                           height: 24,
                           child: Text(
-                            '컨설턴트 2',
+                            'ABCHR',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Pretendard',
@@ -127,7 +137,7 @@ class Type3 extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      "#해시태그1  #해시태그2  #해시태그3",
+                      "#신뢰 #동행 #헤드헌팅",
                       style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: Color(0xFFF3936F1),
@@ -137,7 +147,7 @@ class Type3 extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      "컨설턴트 설명을 2줄이상 컨설턴트 설명을 2줄이상\n컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상",
+                      "15년 동안 다양한 기업과 직무를 진행하였고, 10,000 명에 가까운\n후보자들과 소통하면서 얻은 경험과 지혜를 함께 나누기를 희망합니다.",
                       style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: Colors.black,
@@ -152,7 +162,10 @@ class Type3 extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            print('해당 세번째 푼으로 이동 견적으로 이동');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ConsultantDetail_3()),
+            );
           },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -160,7 +173,7 @@ class Type3 extends StatelessWidget {
             child: Row(
               children: [
                 Image(
-                    image: AssetImage('assets/images/sign_in_image.png'),
+                    image: AssetImage('assets/images/person1.png'),
                     width: 64,
                     height: 83),
                 SizedBox(width: 16),
@@ -173,7 +186,7 @@ class Type3 extends StatelessWidget {
                         Container(
                           height: 24,
                           child: Text(
-                            '컨설턴트 3',
+                            '엄취쌤',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Pretendard',
@@ -195,7 +208,7 @@ class Type3 extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "#해시태그1  #해시태그2  #해시태그3",
+                          "#논리적 #이성적 #합리적",
                           style: TextStyle(
                               fontFamily: 'Pretendard',
                               color: Color(0xFFF3936F1),
@@ -207,7 +220,7 @@ class Type3 extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      "컨설턴트 설명을 2줄이상 컨설턴트 설명을 2줄이상\n컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상컨설턴트 설명을 2줄이상",
+                      '"엄마! 나 취업했어!" 라고 외치는 날을 기다리고 있나요?\n취업준비생 약 300명 컨설팅 경력의 엄취쌤이 붙게 만들어드립니다!',
                       style: TextStyle(
                           fontFamily: 'Pretendard',
                           color: Colors.black,

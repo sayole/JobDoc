@@ -81,22 +81,22 @@ class _SettingPageState extends State<SettingPage> {
                     fontFamily: 'Pretendard'),
               ),
               //알림
-              SwitchListTile(
-                activeColor: Color(0xFFF3936F1),
-                contentPadding: EdgeInsets.all(0),
-                title: Text(
-                  '알림을 받을게요',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.6,
-                      fontFamily: 'Pretendard'),
-                ),
-                value: _toggled,
-                onChanged: (bool value) {
-                  setState(() => _toggled = value);
-                },
-              ),
+              // SwitchListTile(
+              //   activeColor: Color(0xFFF3936F1),
+              //   contentPadding: EdgeInsets.all(0),
+              //   title: Text(
+              //     '알림을 받을게요',
+              //     style: TextStyle(
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w400,
+              //         letterSpacing: -0.6,
+              //         fontFamily: 'Pretendard'),
+              //   ),
+              //   value: _toggled,
+              //   onChanged: (bool value) {
+              //     setState(() => _toggled = value);
+              //   },
+              // ),
               //앱 공유
               ListTile(
                 contentPadding: EdgeInsets.all(0),
@@ -137,10 +137,7 @@ class _SettingPageState extends State<SettingPage> {
                       fontFamily: 'Pretendard'),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => withDraw()),
-                  );
+                  print("로그아웃하기");
                 },
               ),
               //회원 탈퇴

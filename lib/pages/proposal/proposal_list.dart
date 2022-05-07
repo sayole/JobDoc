@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProposalList extends StatelessWidget {
   ProposalList({Key? key}) : super(key: key);
@@ -17,44 +18,10 @@ class ProposalList extends StatelessWidget {
     0xFFF246DB0,
   ];
 
-  List card_list = [
-    {
-      "card_date": "2022년 04월 23일",
-      "card_title": "컨설턴트의 한줄소개는 20자 이내로만",
-      "card_tag": "#키워드 #최대3개 #입력가능",
-      "card_text":
-          "컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 최대 세줄까지 가능합니다. 가능합니다 가능합니다 가능합니다",
-      "card_amount": "월 300,000원~"
-    },
-    {
-      "card_date": "2022년 04월 23일",
-      "card_title": "컨설턴트의 한줄소개는 20자 이내로만",
-      "card_tag": "#키워드 #최대3개 #입력가능",
-      "card_text":
-          "컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 최대 세줄까지 가능합니다. 가능합니다 가능합니다 가능합니다",
-      "card_amount": "월 300,000원~",
-    },
-    {
-      "card_date": "2022년 04월 23일",
-      "card_title": "컨설턴트의 한줄소개는 20자 이내로만",
-      "card_tag": "#키워드 #최대3개 #입력가능",
-      "card_text":
-          "컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 최대 세줄까지 가능합니다. 가능합니다 가능합니다 가능합니다",
-      "card_amount": "월 300,000원~",
-    },
-    {
-      "card_date": "2022년 04월 23일",
-      "card_title": "컨설턴트의 한줄소개는 20자 이내로만",
-      "card_tag": "#키워드 #최대3개 #입력가능",
-      "card_text":
-          "컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 컨설턴트 설명을 작성합니다. 최대 세줄까지 가능합니다. 가능합니다 가능합니다 가능합니다",
-      "card_amount": "월 300,000원~",
-    },
-  ];
+  List card_list = [];
 
   @override
   Widget build(BuildContext context) {
-    print(card_list[0]);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -67,22 +34,35 @@ class ProposalList extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: ListView.builder(
-        itemCount: card_list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return proposal_card(
-            card_list[index]["card_date"],
-            card_list[index]["card_title"],
-            card_list[index]["card_tag"],
-            card_list[index]["card_text"],
-            card_list[index]["card_amount"],
-            card_colors[index],
-          );
-          // Container(
-          //   child: Text(card_list[index]["card_date"]),
-          // );
-        },
-      ),
+      body: StreamBuilder<QuerySnapshot<Object?>>(
+          stream: FirebaseFirestore.instance
+              .collection('proposal_list')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else {
+              snapshot.data!.docs.forEach((value) {
+                card_list = [...card_list, value.data()!];
+              });
+              return ListView.separated(
+                  itemBuilder: (context, index) =>
+                      card_list[index] != 'undefined'
+                          ? proposal_card(
+                              card_list[index]["date"],
+                              card_list[index]["title"],
+                              card_list[index]["tag"],
+                              card_list[index]["text"],
+                              card_list[index]["amount"],
+                              card_colors[index % 10],
+                            )
+                          : SizedBox(),
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: card_list.length);
+            }
+          }),
     );
   }
 }

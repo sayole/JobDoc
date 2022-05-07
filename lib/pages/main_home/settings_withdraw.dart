@@ -40,9 +40,10 @@ class withDraw extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                    image: AssetImage("assets/images/done_image.png"),
+                    image: AssetImage("assets/images/withdraw.png"),
                     width: 250,
                     height: 300),
+                SizedBox(height: 40),
                 Text('정말 잡닥에서 탈퇴하시겠어요?',
                     style: TextStyle(
                         fontSize: 20,
@@ -88,7 +89,30 @@ class withDraw extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext ctx) {
+                            return AlertDialog(
+                              title: Text("오류가 발생했습니다"),
+                              titleTextStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 20),
+                              actionsOverflowButtonSpacing: 20,
+                              actions: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text("확인")),
+                              ],
+                              content: Text(
+                                  "이용에 불편을 드려서 죄송합니다. 회원탈퇴 문의는 카카오톡으로 주세요."),
+                            );
+                          });
+                    },
                     child: Text(
                       '정말 탈퇴하기',
                       style: TextStyle(
