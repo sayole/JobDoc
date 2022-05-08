@@ -1,14 +1,20 @@
 // import 'dart:js';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
+import 'package:job_doc/pages/login/1_onboarding.dart';
 import 'package:job_doc/services/auth_service.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
+import 'package:job_doc/services/edit_process_service.dart';
 import 'package:job_doc/services/login_process_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import 'pages/main_home/main_home.dart';
 
 FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -67,7 +73,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => LoginProcessSerivce()),
-        ChangeNotifierProvider(create: (context) => BtmNavProvider())
+        ChangeNotifierProvider(create: (context) => BtmNavProvider()),
+        ChangeNotifierProvider(create: (context) => UserService()),
+        ChangeNotifierProvider(create: (context) => EditProcessService())
       ],
       child: const MyApp(),
     ),
@@ -125,7 +133,30 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: DoneLoading(),
+      home: BranchPage(),
+    );
+  }
+}
+
+class BranchPage extends StatelessWidget {
+  const BranchPage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          // UserService userService = context.read<UserService>();
+          // if (userService.checkHaveUserData() == true) {
+          //   return HomePage();
+          // } else {
+          //   return StartingProcess();
+          // }
+          return HomePage();
+        } else {
+          return OnBoarding();
+        }
+      },
     );
   }
 }

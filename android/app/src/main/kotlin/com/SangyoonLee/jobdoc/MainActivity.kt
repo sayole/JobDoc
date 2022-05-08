@@ -1,4 +1,4 @@
-package com.example.job_doc
+package com.SangyoonLee.jobdoc
 
 import io.flutter.embedding.android.FlutterActivity
 

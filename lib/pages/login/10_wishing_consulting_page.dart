@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/11_job_posting_page.dart';
 import 'package:job_doc/pages/login/12_done_loading.dart';
 import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/login_process_service.dart';
@@ -14,29 +15,33 @@ class WishingConsultingPage extends StatefulWidget {
   State<WishingConsultingPage> createState() => _WishingConsultingPageState();
 }
 
+List<Map<String, dynamic>> consultingValueList = [
+  {'name': '이력서 및 자기소개서', 'selected': false},
+  {'name': '경력기술서', 'selected': false},
+  {'name': '맞춤 채용공고 추천', 'selected': false},
+  {'name': '퍼스널 브랜딩', 'selected': false},
+  {'name': '커리어 전환', 'selected': false},
+  {'name': '면접', 'selected': false},
+  {'name': '직무 및 기업 분석', 'selected': false},
+  {'name': '기타', 'selected': false},
+];
+
 class _WishingConsultingPageState extends State<WishingConsultingPage> {
   List<String> consultingList = [];
-  List<Map<String, dynamic>> valueList = [
-    {'name': '이력서 및 자기소개서', 'selected': false},
-    {'name': '경력기술서', 'selected': false},
-    {'name': '맞춤 채용공고 추천', 'selected': false},
-    {'name': '퍼스널 브랜딩', 'selected': false},
-    {'name': '커리어 전환', 'selected': false},
-    {'name': '면접', 'selected': false},
-    {'name': '직무 및 기업 분석', 'selected': false},
-    {'name': '기타', 'selected': false},
-  ];
 
   modifyJoinList(int index) {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
-    valueList[index]['selected'] = !valueList[index]['selected'];
-    if (valueList[index]['selected'] == true) {
-      consultingList.add(valueList[index]['name']);
+    consultingValueList[index]['selected'] =
+        !consultingValueList[index]['selected'];
+    if (consultingValueList[index]['selected'] == true) {
+      consultingList.add(consultingValueList[index]['name']);
       service.updateTextBox(consultingList);
     } else {
-      consultingList.remove(valueList[index]['name']);
-      service.deleteTextBox(consultingList, valueList[index]['name']);
+      consultingList.remove(consultingValueList[index]['name']);
+      service.deleteTextBox(consultingList, consultingValueList[index]['name']);
     }
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingConsulting = consultingList;
   }
 
   @override
@@ -63,7 +68,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[0]['selected'] == true
+                      color: consultingValueList[0]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -74,7 +79,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[0]['selected'] == true
+                          consultingValueList[0]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -106,7 +111,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[1]['selected'] == true
+                      color: consultingValueList[1]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -117,7 +122,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[1]['selected'] == true
+                          consultingValueList[1]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -149,7 +154,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[2]['selected'] == true
+                      color: consultingValueList[2]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -160,7 +165,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[2]['selected'] == true
+                          consultingValueList[2]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -192,7 +197,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[3]['selected'] == true
+                      color: consultingValueList[3]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -203,7 +208,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[3]['selected'] == true
+                          consultingValueList[3]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -235,7 +240,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[4]['selected'] == true
+                      color: consultingValueList[4]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -246,7 +251,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[4]['selected'] == true
+                          consultingValueList[4]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -278,7 +283,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[5]['selected'] == true
+                      color: consultingValueList[5]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -289,7 +294,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[5]['selected'] == true
+                          consultingValueList[5]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -321,7 +326,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[6]['selected'] == true
+                      color: consultingValueList[6]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -332,7 +337,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[6]['selected'] == true
+                          consultingValueList[6]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,
@@ -364,7 +369,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
-                      color: valueList[7]['selected'] == true
+                      color: consultingValueList[7]['selected'] == true
                           ? Color(0xff3936f1)
                           : Colors.grey,
                     ),
@@ -375,7 +380,7 @@ class _WishingConsultingPageState extends State<WishingConsultingPage> {
                     child: Row(
                       children: [
                         Image.asset(
-                          valueList[7]['selected'] == true
+                          consultingValueList[7]['selected'] == true
                               ? 'assets/icons/check_chosen.png'
                               : 'assets/icons/check_not_chosen.png',
                           width: 24,

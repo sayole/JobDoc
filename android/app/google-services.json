@@ -7,12 +7,52 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:360351537897:android:3cdd947d1c62f2f5502e78",
+        "mobilesdk_app_id": "1:360351537897:android:b499f7d0bd72d965502e78",
         "android_client_info": {
-          "package_name": "com.example.job_doc"
+          "package_name": "com.SangyoonLee.jobdoc"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "360351537897-d942o4lenuge761ht3khmq0q0mmfn652.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SangyoonLee.jobdoc",
+            "certificate_hash": "b55f905275b6184e8fcc615401330af074e9e6fd"
+          }
+        },
+        {
+          "client_id": "360351537897-jlb1sqr360sjo2ko0g8ee1d2lgsb7i0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SangyoonLee.jobdoc",
+            "certificate_hash": "f2874aa88fd1505819fe44ef35c8678e5d02c469"
+          }
+        },
+        {
+          "client_id": "360351537897-kpupti533vbklifq9egopek05c5poakk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SangyoonLee.jobdoc",
+            "certificate_hash": "32b8c71f11235253eb43b022736596f14535bc0d"
+          }
+        },
+        {
+          "client_id": "360351537897-nciog9sqh1rvb2nqgsgv09p215eg3cjn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SangyoonLee.jobdoc",
+            "certificate_hash": "e82b9372002d88c99ae636058a0546cfea3789b6"
+          }
+        },
+        {
+          "client_id": "360351537897-vvbes71i96bebhvq1jq75586go71kg7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SangyoonLee.jobdoc",
+            "certificate_hash": "0279833c846110d660997b3bba26d190b78f3e51"
+          }
+        },
         {
           "client_id": "360351537897-6k28a8p66vjpgsp9fg8c15u08dcfbb2c.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +69,13 @@
             {
               "client_id": "360351537897-6k28a8p66vjpgsp9fg8c15u08dcfbb2c.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "360351537897-1h4i2bnrcnf7rovuvbn7q1m2jvfi7e4q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.SangyoonLee.jobdoc"
+              }
             }
           ]
         }

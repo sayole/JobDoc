@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/10_wishing_consulting_page.dart';
 import 'package:job_doc/pages/login/widgets/submit_widgets.dart';
 import 'package:job_doc/services/login_process_service.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import 'login_process_scaffold.dart';
@@ -13,15 +14,18 @@ class WishingJoinPage extends StatefulWidget {
   State<WishingJoinPage> createState() => _WishingJoinPageState();
 }
 
+List<Map<String, dynamic>> joinValueList = [
+  {'name': '지금 당장 바로 할거예요', 'selected': false},
+  {'name': '차근차근 준비해나가고 싶어요', 'selected': false},
+  {'name': '아직은 생각이 없어요', 'selected': false}
+];
+
 class _WishingJoinPageState extends State<WishingJoinPage> {
   List<String> joinList = [];
-  List<Map<String, dynamic>> valueList = [
-    {'name': '지금 당장 바로 할거예요', 'selected': false},
-    {'name': '차근차근 준비해나가고 싶어요', 'selected': false},
-    {'name': '아직은 생각이 없어요', 'selected': false}
-  ];
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingJoinDate = joinList;
     service.checkProcessDone();
   }
 
@@ -32,14 +36,16 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
 
   modifyJoinList(int index) {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
-    valueList[index]['selected'] = !valueList[index]['selected'];
-    if (valueList[index]['selected'] == true) {
-      joinList.add(valueList[index]['name']);
+    joinValueList[index]['selected'] = !joinValueList[index]['selected'];
+    if (joinValueList[index]['selected'] == true) {
+      joinList.add(joinValueList[index]['name']);
       service.updateTextBox(joinList);
     } else {
-      joinList.remove(valueList[index]['name']);
-      service.deleteTextBox(joinList, valueList[index]['name']);
+      joinList.remove(joinValueList[index]['name']);
+      service.deleteTextBox(joinList, joinValueList[index]['name']);
     }
+    UserService userService = context.read<UserService>();
+    userService.thisUser.wishingJoinDate = joinList;
   }
 
   @override
@@ -65,7 +71,7 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                   padding: EdgeInsets.all(10),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
-                    color: valueList[0]['selected'] == true
+                    color: joinValueList[0]['selected'] == true
                         ? Color(0xff3936f1)
                         : Colors.white,
                     border: Border.all(
@@ -77,11 +83,11 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                     child: Text(
                       "지금 당장 바로 할거예요",
                       style: TextStyle(
-                        color: valueList[0]['selected'] == true
+                        color: joinValueList[0]['selected'] == true
                             ? Colors.white
                             : Color(0xff3d3d3d),
                         fontSize: 16,
-                        fontWeight: valueList[0]['selected'] == true
+                        fontWeight: joinValueList[0]['selected'] == true
                             ? FontWeight.w600
                             : FontWeight.w400,
                         letterSpacing: -0.6,
@@ -100,7 +106,7 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                   padding: EdgeInsets.all(10),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
-                    color: valueList[1]['selected'] == true
+                    color: joinValueList[1]['selected'] == true
                         ? Color(0xff3936f1)
                         : Colors.white,
                     border: Border.all(
@@ -112,11 +118,11 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                     child: Text(
                       "차근차근 준비해나가고 싶어요",
                       style: TextStyle(
-                        color: valueList[1]['selected'] == true
+                        color: joinValueList[1]['selected'] == true
                             ? Colors.white
                             : Color(0xff3d3d3d),
                         fontSize: 16,
-                        fontWeight: valueList[1]['selected'] == true
+                        fontWeight: joinValueList[1]['selected'] == true
                             ? FontWeight.w600
                             : FontWeight.w400,
                         letterSpacing: -0.6,
@@ -135,7 +141,7 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                   padding: EdgeInsets.all(10),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
-                    color: valueList[2]['selected'] == true
+                    color: joinValueList[2]['selected'] == true
                         ? Color(0xff3936f1)
                         : Colors.white,
                     border: Border.all(
@@ -147,11 +153,11 @@ class _WishingJoinPageState extends State<WishingJoinPage> {
                     child: Text(
                       "아직은 생각이 없어요",
                       style: TextStyle(
-                        color: valueList[2]['selected'] == true
+                        color: joinValueList[2]['selected'] == true
                             ? Colors.white
                             : Color(0xff3d3d3d),
                         fontSize: 16,
-                        fontWeight: valueList[2]['selected'] == true
+                        fontWeight: joinValueList[2]['selected'] == true
                             ? FontWeight.w600
                             : FontWeight.w400,
                         letterSpacing: -0.6,

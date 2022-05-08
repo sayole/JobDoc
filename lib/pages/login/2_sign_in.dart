@@ -1,7 +1,18 @@
 //회원가입 페이지
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/main.dart';
+import 'package:job_doc/models/user_data.dart';
 import 'package:job_doc/pages/login/3_starting_process.dart';
+import 'package:job_doc/pages/main_home/main_home.dart';
+import 'package:job_doc/pages/main_home/main_home_type1.dart';
+import 'package:job_doc/pages/myPage/edit_my_page.dart';
+import 'package:job_doc/pages/myPage/my_page.dart';
+import 'package:job_doc/services/auth_service.dart';
+import 'package:job_doc/services/user_service.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -14,12 +25,157 @@ class _SignInState extends State<SignIn> {
   TapGestureRecognizer privacyLinkRecognizer = TapGestureRecognizer();
   TapGestureRecognizer usageLinkRecognizer = TapGestureRecognizer();
 
-  void NextPage() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => PrivacyPolicy()),
-    // );
-    print('next');
+  void googleLogin() async {
+    AuthService authService = context.read<AuthService>();
+
+    final myuser = await authService.signInWithGoogle();
+    if (myuser == null) {
+      return;
+    }
+    checkHaveUserdata();
+  }
+
+  void faceBookLogin() async {
+    AuthService service = context.read<AuthService>();
+    final myuser = await service.signInWithFacebook();
+    if (myuser == null) {
+      return;
+    }
+    checkHaveUserdata();
+  }
+
+  void checkHaveUserdata() async {
+    UserService service = context.read<UserService>();
+    await service.checkHaveUserData().then((value) {
+      if (value == true) {
+        toMainPage();
+      } else {
+        nextPage();
+      }
+    });
+  }
+
+  void nextPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => StartingProcess()),
+    );
+  }
+
+  void toMainPage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+      // MaterialPageRoute(builder: (context) => EditMyPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          Text(
+                            "빠르게 이직 컨설팅 받고",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            "퀀텀 점프하기",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/sign_in_image.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('google'), googleLogin()},
+                      child: LoginButton('google'),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('apple'), faceBookLogin()},
+                      child: LoginButton('apple'),
+                    ),
+                    GestureDetector(
+                      onTap: () => {print('facebook'), faceBookLogin()},
+                      child: LoginButton('facebook'),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                        children: [
+                          TextSpan(text: "회원가입 시 "),
+                          TextSpan(
+                            text: '개인정보 처리 방침',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                            recognizer: privacyLinkRecognizer
+                              ..onTap = () => launch(
+                                  "https://www.notion.so/hampaper/d838358b52a7490ab7ff7a4e2c055d1b"),
+                          ),
+                          TextSpan(text: '을 읽었으며,\n  '),
+                          TextSpan(
+                            text: '이용약관',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                            recognizer: usageLinkRecognizer
+                              ..onTap = () => launch(
+                                  "https://www.notion.so/hampaper/d838358b52a7490ab7ff7a4e2c055d1b"),
+                          ),
+                          TextSpan(text: "에 동의하신 것으로 간주합니다."),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget LoginButton(String type) {
@@ -93,112 +249,6 @@ class _SignInState extends State<SignIn> {
           height: 16,
         )
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        children: [
-                          Text(
-                            "빠르게 이직 컨설팅 받고",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            "퀀텀 점프하기",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Image.asset(
-                        'assets/images/sign_in_image.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('google'), NextPage()},
-                      child: LoginButton('google'),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('apple'), NextPage()},
-                      child: LoginButton('apple'),
-                    ),
-                    GestureDetector(
-                      onTap: () => {print('facebook'), NextPage()},
-                      child: LoginButton('facebook'),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
-                        children: [
-                          TextSpan(text: "회원가입 시 "),
-                          TextSpan(
-                            text: '개인정보 처리 방침',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
-                            ),
-                            recognizer: privacyLinkRecognizer
-                              ..onTap = () => {print('privacy')},
-                          ),
-                          TextSpan(text: '을 읽었으며,\n  '),
-                          TextSpan(
-                            text: '이용약관',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
-                            ),
-                            recognizer: usageLinkRecognizer
-                              ..onTap = () => {print('usage')},
-                          ),
-                          TextSpan(text: "에 동의하신 것으로 간주합니다."),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

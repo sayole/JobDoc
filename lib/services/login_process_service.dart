@@ -12,6 +12,12 @@ class LoginProcessSerivce extends ChangeNotifier {
     }
   }
 
+  deletePost(List<String> postList, String thisText) {
+    print('hello');
+    print(postList);
+    // postList.remove(thisText);
+  }
+
   updateTextBox(List<String> valueList) {
     if (valueList.length == 0) {
       isDone = false;
@@ -27,9 +33,14 @@ class LoginProcessSerivce extends ChangeNotifier {
     notifyListeners();
   }
 
-  makeTextBox(List<String> skillsetList) {
-    skillsetList.add(controllers[0].text);
-    controllers[0].text = '';
+  makeTextBox(List<String> skillsetList, Function updateData,
+      TextEditingController skillController) {
+    if (skillController.text == '') {
+      return;
+    }
+    skillsetList.add(skillController.text);
+    skillController.text = '';
+    updateData();
     isDone = true;
     notifyListeners();
   }

@@ -45,13 +45,6 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        //스크롤 구현 못함
-                        // 하려면 '다음'버튼을 다른 컴포넌트들과 listview 혹은 column에 넣어야 함
-                        // 그러면 Stack과 Positioned를 쓰지 않아
-                        // 컴포넌트들이 내려가는대로 같이 내려가버림
-                        //https://stackoverflow.com/questions/54359662/how-to-make-stack-layout-scroll-able-using-singlechildscrollview
-                        // ListView
-                        // shrinkWrap: false,
                         children: [
                           widget.index == 0
                               ? SizedBox(height: 2)
@@ -76,11 +69,13 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                       GestureDetector(
                         onTap: loginProcessService.isDone
                             ? () => {
+                                  loginProcessService.isDone = false,
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => widget.nextPage),
                                   ),
+                                  loginProcessService
                                 }
                             : null,
                         child: Container(
@@ -108,7 +103,7 @@ class _LoginProcessScaffoldState extends State<LoginProcessScaffold> {
                         ),
                       ),
                       Container(
-                        height: 20,
+                        height: MediaQuery.of(context).size.height * 0.06,
                         decoration: BoxDecoration(color: Colors.white),
                       ),
                     ],

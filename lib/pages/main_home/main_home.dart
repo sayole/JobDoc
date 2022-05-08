@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:job_doc/models/user_data.dart';
+import 'package:job_doc/pages/myPage/edit_my_page.dart';
 import 'package:job_doc/services/bottomnavi_service.dart';
 import 'package:provider/provider.dart';
 import '../myPage/my_page.dart';
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage>
             children: [
               MainPage(), // tpye1
               ProposalList(), // 프로포절 페이지 , 여기도 다 넘겨주기
-              mypage(), // 내정보 페이지
+              EditMyPage(), // 내정보 페이지
               SettingPage(),
             ],
           ),

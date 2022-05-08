@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:job_doc/pages/proposal/contact_info.dart';
 
 class ConsultantDetail extends StatelessWidget {
-  const ConsultantDetail({Key? key}) : super(key: key);
+  late String doc_id;
+
+  ConsultantDetail({
+    required this.doc_id,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Image.asset(
+            "assets/icons/left_arrow.png",
+            width: 28,
+          ),
+        ),
         title: Text(
           "견적 상세 내용",
           style: TextStyle(
@@ -16,12 +30,23 @@ class ConsultantDetail extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Image.asset(
+              "assets/icons/close.png",
+              width: 28,
+            ),
+          ),
+        ],
         elevation: 0,
       ),
       body: StreamBuilder<DocumentSnapshot<Object?>>(
           stream: FirebaseFirestore.instance
               .collection('proposal_list')
-              .doc("bvG7EjjUgP0rbZiP1RuJ")
+              .doc(doc_id)
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -47,6 +72,7 @@ class ConsultantDetail extends StatelessWidget {
                 title: data["title"],
                 user_id: data["user_id"],
                 consultant_nickname: data["consultant_nickname"],
+                doc_id: doc_id,
               );
             }
           }),
@@ -70,6 +96,7 @@ class DetailContent extends StatelessWidget {
   late String title;
   late String user_id;
   late String consultant_nickname;
+  late String doc_id;
 
   DetailContent({
     required this.amount,
@@ -87,12 +114,11 @@ class DetailContent extends StatelessWidget {
     required this.title,
     required this.user_id,
     required this.consultant_nickname,
+    required this.doc_id,
   });
 
   @override
   Widget build(BuildContext context) {
-    print(amount);
-
     return Column(
       children: [
         Expanded(
@@ -173,12 +199,9 @@ class DetailContent extends StatelessWidget {
                           padding: const EdgeInsets.only(
                             right: 8,
                           ),
-                          child: ClipOval(
-                            child: Container(
-                              height: 60,
-                              width: 60,
-                              child: Image.network(company_list[index]),
-                            ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.network(company_list[index]),
                           ),
                         );
                       },
@@ -214,11 +237,21 @@ class DetailContent extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: reviews.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 100,
-                          width: 100,
-                          child: Image.network(reviews[index]),
-                          margin: EdgeInsets.only(right: 8),
+                        return GestureDetector(
+                          onTap: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (_) => ImageDialog(
+                                ImgUrl: reviews[index],
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            child: Image.network(reviews[index]),
+                            margin: EdgeInsets.only(right: 8),
+                          ),
                         );
                       },
                     ),
@@ -324,24 +357,53 @@ class DetailContent extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: 52,
-          child: Center(
-            child: Text(
-              "이 컨설턴트와 상담하기",
-              style: TextStyle(
-                fontSize: 14,
-                letterSpacing: -0.6,
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (contect) => ContactInfo(
+                          doc_id: doc_id,
+                        )));
+          },
+          child: Container(
+            height: 52,
+            child: Center(
+              child: Text(
+                "이 컨설턴트와 상담하기",
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: -0.6,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          decoration: BoxDecoration(
-            color: Color(0xFFF3936F1),
+            decoration: BoxDecoration(
+              color: Color(0xFFF3936F1),
+            ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class ImageDialog extends StatelessWidget {
+  late String ImgUrl;
+
+  ImageDialog({required this.ImgUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Container(
+        height: 400,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(ImgUrl), fit: BoxFit.scaleDown),
+        ),
+      ),
     );
   }
 }

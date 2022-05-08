@@ -5,10 +5,13 @@
 // https://jamie-dev.tistory.com/128
 
 // 페이스북 로그인 연동
-// https://sudarlife.tistory.com/entry/flutter-firebase-auth-%ED%94%8C%EB%9F%AC%ED%84%B0-%ED%8C%8C%EC%9D%B4%EC%96%B4%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%97%B0%EB%8F%99-facebook-%EB%A1%9C%EA%B7%B8%EC%9D%B8-part-3
+//https://www.youtube.com/watch?v=Ai3QWQ_1pJM
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 // 기본 로그인
 class AuthService extends ChangeNotifier {
@@ -17,76 +20,49 @@ class AuthService extends ChangeNotifier {
     return FirebaseAuth.instance.currentUser;
   }
 
-  void signUp({
-    required String email, // 이메일
-    required String password, // 비밀번호
-    required Function onSuccess, // 가입 성공시 호출되는 함수
-    required Function(String err) onError, // 에러 발생시 호출되는 함수
-  }) async {
-    // 회원가입
-    // 이메일 및 비밀번호 입력 여부 확인
-    if (email.isEmpty) {
-      onError("이메일을 입력해 주세요.");
-      return;
-    } else if (password.isEmpty) {
-      onError("비밀번호를 입력해 주세요.");
-      return;
-    }
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // firebase auth 회원 가입
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
-      // 성공 함수 호출
-      onSuccess();
-    } on FirebaseAuthException catch (e) {
-      // Firebase auth 에러 발생
-      onError(e.message!);
-    } catch (e) {
-      // Firebase auth 이외의 에러 발생
-      onError(e.toString());
-    }
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  void signIn({
-    required String email, // 이메일
-    required String password, // 비밀번호
-    required Function onSuccess, // 로그인 성공시 호출되는 함수
-    required Function(String err) onError, // 에러 발생시 호출되는 함수
-  }) async {
-    // 로그인
-    if (email.isEmpty) {
-      onError('이메일을 입력해주세요.');
-      return;
-    } else if (password.isEmpty) {
-      onError('비밀번호를 입력해주세요.');
-      return;
-    }
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // 로그인 시도
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-      onSuccess(); // 성공 함수 호출
-      notifyListeners(); // 로그인 상태 변경 알림
-    } on FirebaseAuthException catch (e) {
-      // firebase auth 에러 발생
-      onError(e.message!);
-    } catch (e) {
-      // Firebase auth 이외의 에러 발생
-      onError(e.toString());
-    }
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
   void signOut() async {
+    print(FirebaseAuth.instance.currentUser);
+
     // 로그아웃
     await FirebaseAuth.instance.signOut();
+    print(FirebaseAuth.instance.currentUser);
     notifyListeners(); // 로그인 상태 변경 알림
+  }
+
+  void deleteUser() async {
+    final userCollection = FirebaseFirestore.instance.collection('user');
+    userCollection.doc(currentUser()?.uid).get();
+    final user = FirebaseAuth.instance.currentUser;
+    user?.delete();
   }
 }

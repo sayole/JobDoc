@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_doc/pages/login/7_skill_set_page.dart';
 import 'package:job_doc/pages/login/login_process_scaffold.dart';
+import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import '../../services/login_process_service.dart';
 import 'widgets/submit_widgets.dart';
@@ -20,6 +21,12 @@ class _CareerPageState extends State<CareerPage> {
 
   void checkProcessDone() {
     LoginProcessSerivce service = context.read<LoginProcessSerivce>();
+    UserService userService = context.read<UserService>();
+    userService.thisUser.careerCompany = companyController.text;
+    userService.thisUser.careerYears = yearsController.text;
+    userService.thisUser.careerPart = partController.text;
+    userService.thisUser.careerType = typeController.text;
+
     service.checkProcessDone();
   }
 
@@ -47,7 +54,7 @@ class _CareerPageState extends State<CareerPage> {
                 children: [
                   ...SubmitWidgets.infoText(
                       '지금은 어떤 일을 하고 계시나요?', '현재 어떤 회사에서 어떤 일을 하고 계신지 알려주세요.'),
-                  SubmitWidgets.submitTextField('학력', companyController),
+                  SubmitWidgets.submitTextField('회사', companyController),
                   SubmitWidgets.submitDropDownField('년차', yearsController),
                   SubmitWidgets.submitTextField('직무', partController),
                   SubmitWidgets.submitDropDownField('고용형태', typeController),

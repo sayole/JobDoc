@@ -1,10 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:job_doc/pages/login/8_wishing_company_page.dart';
 import 'package:job_doc/pages/login/widgets/drop_down_input.dart';
+import 'package:job_doc/pages/login/widgets/login_styles.dart';
 
 import '../../../services/login_process_service.dart';
-import 'login_styles.dart';
 
 class SubmitWidgets {
   //학력
@@ -52,8 +53,9 @@ class SubmitWidgets {
     ];
   }
 
-  static Widget submitTextField(
-      String widgetName, TextEditingController editingController) {
+  static Widget submitTextField(String widgetName,
+      TextEditingController editingController, String selectedText) {
+    editingController.text = selectedText;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,9 +84,9 @@ class SubmitWidgets {
     );
   }
 
-  static Widget submitDropDownField(
-      String widgetName, TextEditingController editingController) {
-    print(dropDownValueList[widgetName]?.length);
+  static Widget submitDropDownField(String widgetName,
+      TextEditingController editingController, String selectedText) {
+    editingController.text = selectedText;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,6 +109,7 @@ class SubmitWidgets {
           onChanged: (value) {
             editingController.text = value.toString();
           },
+          selectedItem: selectedText == 'none' ? '' : selectedText,
         ),
         SizedBox(
           height: 20,
@@ -144,8 +147,6 @@ class SubmitWidgets {
               SizedBox(width: 8),
               GestureDetector(
                 onTap: () {
-                  //삭제
-                  // inputColor == 'blue'?
                   deleteTextBox(inputText);
                 },
                 child: selected == true
@@ -169,9 +170,28 @@ class SubmitWidgets {
 
   static List<Widget> companyWidget(
       String title,
+      List<String> companys,
+      dynamic doc,
       List<Map<String, dynamic>> thisList1,
       List<Map<String, dynamic>> thisList2,
       Function switchFuntion) {
+    // for (var company in doc.get('wishingCompany')) {
+
+    //     for (var node in thisList1) {
+    //       if (node['name'] == company) {
+    //         node['selected'] = true;
+    //         companys.add(node['name']);
+    //         break;
+    //       }
+    //     }
+    //     for (var node in thisList2) {
+    //       if (node['name'] == company) {
+    //         node['selected'] = true;
+    //         companys.add(node['name']);
+    //         break;
+    //       }
+    //     }
+    // }
     return [
       Text(
         title,
@@ -191,7 +211,7 @@ class SubmitWidgets {
                   ...thisList1.asMap().entries.map((e) => SubmitWidgets.textBox(
                       e.value['selected'],
                       e.value['name'] ?? '',
-                      (a) => switchFuntion(a, thisList1, e.key)))
+                      (a) => switchFuntion(a, thisList1, e.key, doc)))
                 ],
               ),
             ),
@@ -202,7 +222,7 @@ class SubmitWidgets {
                 ...thisList2.asMap().entries.map((e) => SubmitWidgets.textBox(
                     e.value['selected'],
                     e.value['name'] ?? '',
-                    (a) => switchFuntion(a, thisList2, e.key)))
+                    (a) => switchFuntion(a, thisList2, e.key, doc)))
               ],
             ),
           ],
