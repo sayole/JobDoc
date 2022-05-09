@@ -8,6 +8,13 @@ class ConsultantDetail_1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var company_list = [
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fsamsung.png?alt=media&token=fded0e99-bdec-450c-a04d-d1ff9c86d0b2',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fsamsung_bio.png?alt=media&token=d0c78ddc-4571-4280-a84a-d117ef4b3a88',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Flh.jpg?alt=media&token=94f9fd3b-900d-48fd-9259-20ecb061e079',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fpulmuone.jpg?alt=media&token=73559962-4320-4cf4-9798-c1cb4e326220',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fseoul_univ.jpg?alt=media&token=1dd035ed-fbbd-479d-b3d1-8d9d1477cde4',
+    ];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -95,22 +102,22 @@ class ConsultantDetail_1 extends StatelessWidget {
                     SizedBox(height: 12),
                     Container(
                       //삼성전자. 삼성바이오로직스, LH공사. 풀무원. 서울대학병원.
-                      height: 30,
+                      height: 60,
                       child: ListView.builder(
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: company_list.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(
                               right: 8,
                             ),
-                            child: ClipOval(
-                              child: Container(
-                                height: 60,
-                                width: 60,
-                                color: Colors.red,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: Image.network(
+                                company_list[index],
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           );
@@ -128,7 +135,10 @@ class ConsultantDetail_1 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 12),
-                    Text("여기에 서비스 소개"),
+                    Text(
+                        "임희정 컨설턴트 코치\n\*\*\* 면접관을 사로잡는 1:1 취업 이직 컨설팅코칭 \*\*\*\n (자소서 작성, 수정, 진단 및 첨삭,면접)\n  \*오프라인        100분 진행 20만원 \/추가 60분 5만원\n  \*온라인 zoom 100분 진행 15만원 \/추가 60분 3만원\n \n클래스 진행 방법: \n1)자기소개서 첨삭 및 완성     \n2)면접 코칭. 모의면접   \n3)커리어 코칭. 직무 진단 강점 정리        \n4)포트폴리오 첨삭및 피드백\n\n이런분들께 좋아요: \n1) 대기업. 외국계.공공기관 취업 희망하는 신입 취업, 재취업 준비생                \n2) 경력직 이직을 원하는 분        \n3) 커리어 코칭을 통해 진로적성을 설계 하고 싶은 분  \n4) 기타 취업, 커리어 진로 관련 고민이 있는 분\n\n "),
+                    Text(
+                        '전문 커리어 코치가 함께 합니다. \n기업에 합격하는 자소서를 쓰고 싶으신가요? \n합격의 길을 찾도록 도움을 주는 전문 커리어 코치와 함께 출발해 보세요. \n\n코칭을 통해 자신 내면의 찾지 못한 강점과 잠재력을 찾아 특별한 자신을 어필 하는 자소서가 만들어 집니다. \n개인별,조직별 정확한 분석과 코칭기법을 여러분의 최종합격을 돕겠습니다. '),
                     SizedBox(height: 40),
                     Text(
                       "컨설턴트 후기",

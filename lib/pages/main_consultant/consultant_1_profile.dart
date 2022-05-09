@@ -51,7 +51,7 @@ class ContactInfo1 extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "#키워드 #3개까지 #쌉가능",
+                  "#인사담당자98%만족도 #자소서코칭 #면접코칭 #이직컨설팅",
                   style: TextStyle(
                       color: Color(0xFFF3936F1),
                       fontSize: 14,
@@ -74,7 +74,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "qusdlsk",
+                      "010-6207-7110",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -99,7 +99,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "010-9912-3741",
+                      "010-6207-7110",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -124,7 +124,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "dsdfkdj@gmail.com",
+                      "heejeonglim07@gmail.com",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -149,7 +149,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "링크",
+                      "",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
