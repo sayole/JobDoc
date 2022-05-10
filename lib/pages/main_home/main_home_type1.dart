@@ -41,11 +41,13 @@ class _MainPageState extends State<MainPage> {
       return FutureBuilder<QuerySnapshot>(
           future: userService.getUserData(),
           builder: (context, snapshot) {
-            final documents = snapshot.data?.docs ?? [];
-            final doc = documents[0];
-            if (documents.isEmpty) {
-              return Text('');
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
             } else {
+              final documents = snapshot.data?.docs ?? [];
+              final doc = documents[0];
               return Scaffold(
                 body: SafeArea(
                   child: SingleChildScrollView(
@@ -134,6 +136,8 @@ class _MainPageState extends State<MainPage> {
                             StreamBuilder<QuerySnapshot<Object?>>(
                               stream: FirebaseFirestore.instance
                                   .collection('proposal_list')
+                                  .where('user_id',
+                                      isEqualTo: userService.currentUser()?.uid)
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasError) {
@@ -148,10 +152,16 @@ class _MainPageState extends State<MainPage> {
                                   });
                                   if (card_list.isEmpty) {
                                     return Container(
-                                        height: 327,
-                                        width: 218,
-                                        decoration:
-                                            BoxDecoration(color: Colors.grey));
+                                      height: 327,
+                                      width: 218,
+                                      decoration:
+                                          BoxDecoration(color: Colors.grey),
+                                      child: Text(
+                                        "아직 제안서가 도착하지 않았습니다.",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    );
                                   } else {
                                     return Container(
                                       height: 327,

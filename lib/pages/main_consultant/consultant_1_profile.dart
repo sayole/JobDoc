@@ -43,7 +43,7 @@ class ContactInfo1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "컨설턴트의 한줄소개는 20자 이내로만",
+                  "당신이 원하는 완벽한 직업을 위한 최고의 파트너",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -74,7 +74,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "010-6207-7110",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -124,7 +124,7 @@ class ContactInfo1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "heejeonglim07@gmail.com",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,

@@ -9,11 +9,17 @@ class ConsultantDetail_1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var company_list = [
-      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fsamsung.png?alt=media&token=fded0e99-bdec-450c-a04d-d1ff9c86d0b2',
       'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fsamsung_bio.png?alt=media&token=d0c78ddc-4571-4280-a84a-d117ef4b3a88',
       'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Flh.jpg?alt=media&token=94f9fd3b-900d-48fd-9259-20ecb061e079',
       'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fpulmuone.jpg?alt=media&token=73559962-4320-4cf4-9798-c1cb4e326220',
       'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fseoul_univ.jpg?alt=media&token=1dd035ed-fbbd-479d-b3d1-8d9d1477cde4',
+    ];
+
+    var reveiw_list = [
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Flh%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%90%E1%85%A5%E1%86%AB%20%E1%84%92%E1%85%A1%E1%86%B8%E1%84%80%E1%85%A7%E1%86%A8.png?alt=media&token=f8ac5c0a-9584-44cc-8071-ddaf4f683c43',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2F%E1%84%80%E1%85%AE%E1%84%80%E1%85%AF%E1%86%AB%E1%84%86%E1%85%A9%20%E1%84%92%E1%85%A1%E1%86%B8%E1%84%80%E1%85%A7%E1%86%A8.png?alt=media&token=ca08bb61-2c2c-4346-872d-87dab50959cb',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2F%E1%84%89%E1%85%A1%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A9%E1%84%85%E1%85%A9%E1%84%8C%E1%85%B5%E1%86%A8%E1%84%89%E1%85%B3%E1%84%92%E1%85%A1%E1%86%B8%E1%84%80%E1%85%A7%E1%86%A8.png?alt=media&token=7349ca9b-1ac9-4412-b9dc-ff561bfd18f4',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2F%E1%84%89%E1%85%A1%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A9%E1%84%85%E1%85%A9%E1%84%8C%E1%85%B5%E1%86%A8%E1%84%89%E1%85%B3%E1%84%92%E1%85%A1%E1%86%B8%E1%84%80%E1%85%A7%E1%86%A8.png?alt=media&token=7349ca9b-1ac9-4412-b9dc-ff561bfd18f4'
     ];
     return Scaffold(
       appBar: AppBar(
@@ -150,23 +156,26 @@ class ConsultantDetail_1 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Container(
-                      height: 100,
+                      //삼성전자. 삼성바이오로직스, LH공사. 풀무원. 서울대학병원.
+                      height: 200,
                       child: ListView.builder(
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: reveiw_list.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              height: 100,
-                              width: 100,
-                              color: Colors.grey,
-                              margin: EdgeInsets.only(right: 8),
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/images/review_example.png'),
-                                fit: BoxFit.cover,
-                              ));
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(0),
+                              child: Image.network(
+                                reveiw_list[index],
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_doc/pages/proposal/consultant_detail.dart';
+import 'package:job_doc/services/user_service.dart';
+import 'package:provider/provider.dart';
 
 class ProposalList extends StatelessWidget {
   ProposalList({Key? key}) : super(key: key);
@@ -23,60 +25,54 @@ class ProposalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Image.asset(
-            "assets/icons/left_arrow.png",
-            width: 28,
+    return Consumer<UserService>(builder: (context, userService, child) {
+      return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "나의견적",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+            ),
           ),
+          elevation: 0,
         ),
-        title: Text(
-          "나의견적",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        elevation: 0,
-      ),
-      body: StreamBuilder<QuerySnapshot<Object?>>(
-          stream: FirebaseFirestore.instance
-              .collection('proposal_list')
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else {
-              snapshot.data!.docs.forEach((value) {
-                card_list = [...card_list, value.data()!];
-              });
-              print(card_list);
-              return ListView.separated(
-                  itemBuilder: (context, index) =>
-                      card_list[index] != 'undefined'
-                          ? proposal_card(
-                              card_date: card_list[index]["date"],
-                              card_title: card_list[index]["title"],
-                              card_tag: card_list[index]["tag"],
-                              card_text: card_list[index]["text"],
-                              card_amount: card_list[index]["amount"],
-                              card_image: card_list[index]["consultant_image"],
-                              card_colors: card_colors[index % 10],
-                              doc_id: snapshot.data!.docs[index].id,
-                            )
-                          : SizedBox(),
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: card_list.length);
-            }
-          }),
-    );
+        body: StreamBuilder<QuerySnapshot<Object?>>(
+            stream: FirebaseFirestore.instance
+                .collection('proposal_list')
+                .where('user_id', isEqualTo: userService.currentUser()?.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong');
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else {
+                snapshot.data!.docs.forEach((value) {
+                  card_list = [...card_list, value.data()!];
+                });
+                print(card_list);
+                return ListView.separated(
+                    itemBuilder: (context, index) => card_list[index] !=
+                            'undefined'
+                        ? proposal_card(
+                            card_date: card_list[index]["date"],
+                            card_title: card_list[index]["title"],
+                            card_tag: card_list[index]["tag"],
+                            card_text: card_list[index]["text"],
+                            card_amount: card_list[index]["amount"],
+                            card_image: card_list[index]["consultant_image"],
+                            card_colors: card_colors[index % 10],
+                            doc_id: snapshot.data!.docs[index].id,
+                          )
+                        : SizedBox(),
+                    separatorBuilder: (context, index) => Divider(),
+                    itemCount: card_list.length);
+              }
+            }),
+      );
+    });
   }
 }
 

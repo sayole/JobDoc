@@ -8,6 +8,22 @@ class ConsultantDetail_3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var company_list = [
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fhanjun.png?alt=media&token=3b551612-8ef3-4c11-9f3b-3026e28c759f',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fgungang.png?alt=media&token=b9c23002-9f65-4f47-9191-68ca02da7b66',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Flh.jpg?alt=media&token=94f9fd3b-900d-48fd-9259-20ecb061e079',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fmetro.png?alt=media&token=a0b2189f-73c6-4d79-8ee8-2f2d05b07ee7',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fhanhwaligo.png?alt=media&token=8a29e815-4baf-4bc4-92c4-02fc18899b4e',
+    ];
+
+    var review_list = [
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Fumch10.png?alt=media&token=498fba4f-7ba8-49b5-9d0e-acce1fefda8f',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Fumchi3.jpeg?alt=media&token=f3c3790c-e617-4630-b53a-d4c6c130dd4e',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Fumchi5.jpeg?alt=media&token=864d0e33-cbb8-4f8e-91a9-cf1eab431d1a',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Fumchi2.jpeg?alt=media&token=5c09ea9a-298e-44a0-a8e2-6a835c4806cb',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/review_list%2Fumchi1.png?alt=media&token=a1273257-1696-4f01-92e1-f3f11e9cffe9'
+    ];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,7 +63,7 @@ class ConsultantDetail_3 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "당신이 원하는 완벽한 직업을 위한 최고의 파트너",
+                      "‘나’에 대한 확실한 이해를 돕겠습니다",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -55,7 +71,7 @@ class ConsultantDetail_3 extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "#인사담당자98%만족도 #자소서코칭 #면접코칭 #이직컨설팅",
+                      "#논리적 #이성적 #합리적",
                       style: TextStyle(
                           color: Color(0xFFF3936F1),
                           fontSize: 14,
@@ -94,23 +110,23 @@ class ConsultantDetail_3 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Container(
-                      //삼성전자. 삼성바이오로직스, LH공사. 풀무원. 서울대학병원.
+                      //삼
                       height: 60,
                       child: ListView.builder(
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: company_list.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(
                               right: 8,
                             ),
-                            child: ClipOval(
-                              child: Container(
-                                height: 60,
-                                width: 60,
-                                color: Colors.red,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: Image.network(
+                                company_list[index],
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           );
@@ -163,18 +179,25 @@ class ConsultantDetail_3 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Container(
-                      height: 100,
+                      //삼
+                      height: 200,
                       child: ListView.builder(
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: review_list.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: 100,
-                            width: 100,
-                            color: Colors.red,
-                            margin: EdgeInsets.only(right: 8),
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              right: 8,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(0),
+                              child: Image.network(
+                                review_list[index],
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
                           );
                         },
                       ),

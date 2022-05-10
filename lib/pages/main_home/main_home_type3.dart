@@ -14,7 +14,7 @@ class Type3 extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text('예지님의 이력서를 바탕으로\n추천드리는 컨설턴트',
+          child: Text('잡닥이 선정한 인기 많은\n이주의 추천 컨설턴트',
               style: TextStyle(
                   fontFamily: 'Pretendard',
                   fontSize: 20,

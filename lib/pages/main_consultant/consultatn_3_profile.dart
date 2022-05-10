@@ -10,7 +10,7 @@ class ContactInfo3 extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          "컨설턴트 닉네임",
+          "엄취쌤 컨설턴트",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w700,
@@ -43,7 +43,7 @@ class ContactInfo3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "컨설턴트의 한줄소개는 20자 이내로만",
+                  "‘나’에 대한 확실한 이해를 돕겠습니다",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class ContactInfo3 extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "#키워드 #3개까지 #쌉가능",
+                  "#논리적 #이성적 #합리적",
                   style: TextStyle(
                       color: Color(0xFFF3936F1),
                       fontSize: 14,
@@ -74,7 +74,7 @@ class ContactInfo3 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "qusdlsk",
+                      "lovesc0820",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -99,7 +99,7 @@ class ContactInfo3 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "010-9912-3741",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -124,7 +124,7 @@ class ContactInfo3 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "dsdfkdj@gmail.com",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -149,7 +149,7 @@ class ContactInfo3 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "링크",
+                      "",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,

@@ -8,6 +8,13 @@ class ConsultantDetail_2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var company_list = [
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fcoupang.png?alt=media&token=34778eae-d5e8-4394-937d-793fb1ca2a9b',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fline.png?alt=media&token=3d87f2e5-177e-4a67-bd7d-d7b2116d4fde',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fswit.png?alt=media&token=3c74a516-8db9-41cb-9422-82e155d01171',
+      'https://firebasestorage.googleapis.com/v0/b/jobdoc-8fbca.appspot.com/o/company_logo%2Fmashkorea.png?alt=media&token=5ae34e8e-430e-41d8-8da4-41addefd7e08',
+    ];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,7 +54,7 @@ class ConsultantDetail_2 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "당신이2최고의 파트너",
+                      "신뢰와 동행으로 고객의 우수한 재능을 발휘할 수 있도록 돕겠습니다",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -55,7 +62,7 @@ class ConsultantDetail_2 extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "#인사담당3333이직컨설팅",
+                      "#신뢰 #동행 #헤드헌팅",
                       style: TextStyle(
                           color: Color(0xFFF3936F1),
                           fontSize: 14,
@@ -66,7 +73,7 @@ class ConsultantDetail_2 extends StatelessWidget {
                     Image.asset("assets/images/person2.png", width: 92),
                     SizedBox(height: 40),
                     Text(
-                      "LHJ 컨설턴트",
+                      "ABCHR 컨설턴트",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -75,7 +82,7 @@ class ConsultantDetail_2 extends StatelessWidget {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      "꿈을 현실로 만들어 드리는 커리어 코치입니다. 따스한 마음으로 진심을 다하는 커리어 컨설팅 코치입니다. 내면의 잠재력을 찾아 원하는 목표를 달성할 수 있도록 함께 합니다.",
+                      "2005년 봄부터 시작한 헤드헌팅 업무를 15년 넘게 수행하면서 다양한 기업과 직무를 진행하였고, 10,000 명에 가까운 후보자들과 소통하면서 얻은 경험과 지혜를 함께 나누기를 희망합니다. 감사합니다.",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -100,17 +107,17 @@ class ConsultantDetail_2 extends StatelessWidget {
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: company_list.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(
                               right: 8,
                             ),
-                            child: ClipOval(
-                              child: Container(
-                                height: 60,
-                                width: 60,
-                                color: Colors.red,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: Image.network(
+                                company_list[index],
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           );
@@ -128,7 +135,8 @@ class ConsultantDetail_2 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 12),
-                    Text("여기에 서비스 소개"),
+                    Text(
+                        "커리어 코칭 비용\n1. 취업컨설팅(자기소개서 및 이력서 첨삭)\n- 오프라인 미팅 60분 당 10만원(온라인 및 화상, 전화 미팅 시에는 20% 할인)\n2. 면접컨설팅\n- 오프라인 미팅 60분 당 10만원(온라인 및 화상, 전화 미팅 시에는 20% 할인)\n3. 커리어컨설팅(직무심화 및 직무전환 등 Career Path 컨설팅)\n- 오프라인 미팅 60분 당 20만원\n컨설팅이 시작된 이후 사용자가 컨설팅을 종료하기를 희망하면 50% 환불"),
                     SizedBox(height: 40),
                     Text(
                       "컨설턴트 후기",

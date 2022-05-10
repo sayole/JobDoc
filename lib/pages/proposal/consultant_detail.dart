@@ -207,7 +207,7 @@ class DetailContent extends StatelessWidget {
                       },
                     ),
                   ),
-                  // 여기에 이미지를 넣어야함.
+                  // 여기에 이미지를 넣어야함.ㅇㅇ
                   SizedBox(height: 40),
                   Text(
                     "서비스 소개",

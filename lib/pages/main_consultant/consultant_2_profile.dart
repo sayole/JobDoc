@@ -10,7 +10,7 @@ class ContactInfo2 extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
-          "컨설턴트 닉네임",
+          "ABCHR 컨설턴트",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w700,
@@ -43,7 +43,7 @@ class ContactInfo2 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "컨설턴트의 한줄소개는 20자 이내로만",
+                  "신뢰와 동행으로 고객의 우수한 재능을 발휘할 수 있도록 돕겠습니다",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class ContactInfo2 extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "#키워드 #3개까지 #쌉가능",
+                  "#신뢰 #동행 #헤드헌팅",
                   style: TextStyle(
                       color: Color(0xFFF3936F1),
                       fontSize: 14,
@@ -74,7 +74,7 @@ class ContactInfo2 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "qusdlsk",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -99,7 +99,7 @@ class ContactInfo2 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "010-9912-3741",
+                      "010-2485-7442",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -124,7 +124,7 @@ class ContactInfo2 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "dsdfkdj@gmail.com",
+                      "미공개",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
@@ -149,7 +149,7 @@ class ContactInfo2 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "링크",
+                      "",
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: -0.6,
