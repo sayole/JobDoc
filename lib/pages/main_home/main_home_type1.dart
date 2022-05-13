@@ -5,6 +5,7 @@ import 'package:job_doc/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'main_home_type3.dart';
 import 'main_home_type4.dart';
+import 'dart:ui';
 
 List card_list = [];
 List card_colors = [
@@ -20,6 +21,8 @@ List card_colors = [
   0xFFFD790D4,
   0xFFF246DB0,
 ];
+
+List card_color_grey = [0xFFFBDBDBD];
 
 List card_images = [
   'assets/images/person1.png',
@@ -153,15 +156,88 @@ class _MainPageState extends State<MainPage> {
                                   if (card_list.isEmpty) {
                                     return Container(
                                       height: 327,
-                                      width: 218,
-                                      decoration:
-                                          BoxDecoration(color: Colors.grey),
-                                      child: Text(
-                                        "아직 제안서가 도착하지 않았습니다.",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700),
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              proposal_main_card(
+                                                  "당신의 더 나은 미래 응원합니다",
+                                                  "#신뢰적 #동행 #멋진사람",
+                                                  "잡닥은 많은 커리어 컨설턴트를 보유하고 있으며, 이는 곧 고객님의 더 나은 미래를 위해 노력합니다.",
+                                                  "300,000원",
+                                                  card_color_grey[0],
+                                                  card_images[0]),
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
+                                                width: 248,
+                                                height: 327,
+                                                child: GlassMorphism(
+                                                  opacity: 0.1,
+                                                  blur: 3,
+                                                  child: Center(
+                                                      child: Text(
+                                                    "아직 컨설턴트의 제안서가\n도착하지 않았어요.\n도착하면 바로 알려드릴게요!",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                    textAlign: TextAlign.center,
+                                                  )),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Stack(
+                                            children: [
+                                              proposal_main_card(
+                                                  "당신의 더 나은 미래 응원합니다",
+                                                  "#신뢰적 #동행 #멋진사람",
+                                                  "잡닥은 많은 커리어 컨설턴트를 보유하고 있으며, 이는 곧 고객님의 더 나은 미래를 위해 노력합니다.",
+                                                  "300,000원",
+                                                  card_color_grey[0],
+                                                  card_images[0]),
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
+                                                width: 248,
+                                                height: 327,
+                                                child: GlassMorphism(
+                                                  opacity: 0.2,
+                                                  blur: 3,
+                                                  child: Center(
+                                                      child: Text(
+                                                    "아직 컨설턴트의 제안서가\n도착하지 않았어요.\n도착하면 바로 알려드릴게요!",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                    textAlign: TextAlign.center,
+                                                  )),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     );
+                                    // Container(
+                                    //   height: 327,
+                                    //   width: 218,
+                                    //   decoration:
+                                    //       BoxDecoration(color: Colors.grey),
+                                    //   child: Center(
+                                    //     child: Text(
+                                    //       "아직 컨설턴트의 제안서가\n도착하지 않았어요.\n도착하면 바로 알려드릴게요!",
+                                    //       textAlign: TextAlign.center,
+                                    //       style: TextStyle(
+                                    //           fontWeight: FontWeight.w700),
+                                    //     ),
+                                    //   ),
+                                    // );
                                   } else {
                                     return Container(
                                       height: 327,
@@ -281,6 +357,37 @@ class proposal_main_card extends StatelessWidget {
                       fontWeight: FontWeight.w600)),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class GlassMorphism extends StatelessWidget {
+  final double blur;
+  final double opacity;
+  final Widget child;
+
+  const GlassMorphism({
+    Key? key,
+    required this.blur,
+    required this.opacity,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(opacity),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            border:
+                Border.all(width: 1.5, color: Colors.white.withOpacity(0.2)),
+          ),
+          child: child,
         ),
       ),
     );
